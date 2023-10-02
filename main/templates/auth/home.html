@@ -1,0 +1,107 @@
+{% extends 'adminLayout.html' %}
+{% load static %}
+{% block body %}
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add new pet</button>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New Pet</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger d-none d-block"  id="petAlert"role="alert">
+         Please complete all the inputs!
+        </div>
+        <form enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="name" class="col-form-label">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" >
+          </div>
+
+          <div class="mb-3">
+            <label for="inputKind" class="col-form-label">Kind of animal:</label>
+            <select class="form-select" id="inputKind" name="specie">
+              <option selected disabled value=''>Choose...</option>
+              <option value="dog">Dog</option>
+              <option value="cat">Cat</option>
+              <option value="bird">Bird</option>
+              <option value="reptil">Reptil</option>
+              <option value="fish">Fish</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="date" class="col-form-label">Date of birth:</label>
+            <input type="date" class="form-control"id="date" max="{{date}}" name="birth" >
+          </div>
+          <div class="mb-3">
+            <label for="sex" class="col-form-label">Sex:</label>
+            <select class="form-select" id="sex" name="sex">
+              <option selected disabled value=''>Choose...</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="weight" class="col-form-label">Weight (lbs):</label>
+            <input type="number" class="form-control" id="weight" name="weight">
+          </div>
+          <div class="mb-3">
+            <label for="fileInput" class="col-form-label">Image:</label>
+            <input type="file" accept="image/png, image/gif, image/jpeg"  class="form-control" id="fileInput" name="image">
+          </div>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="petSubmit" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<h2 class="text-center fw-bold mt-3">My Pets</h2>
+
+<div class="card-container">
+  {% for pet in pets %}
+    <a href="{% url 'dashboard' id=pet.id %}">
+      <div class="pet mb-3"> 
+        <div class="pet-start">
+          {% if pet.pet_image %}
+            <img src="{{ pet.pet_image.url }}" class="pet-img" alt="...">
+          {% endif %}
+        </div> 
+        <div class="pet-body">
+          <h5 class="pet-title text-center text-white">{{ pet.name }}</h5>
+        </div>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+
+
+    
+    
+
+
+</div>
+  
+
+{% endblock body %}
+
+
+{% block script %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script src="{% static 'pets/js/pet.js' %}"></script>
+{% endblock script %}
+
+

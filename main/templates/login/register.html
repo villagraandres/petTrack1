@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{% block body %}
+
+
+<div class="container index mt-4">
+    <div class="brand">
+        <h1 class="text-gradient">PetTrack <i class="fa-solid fa-shield-cat"></i> </h1>
+        <p class="slogan">Keeping your pets on track </p>
+    </div>
+
+    <div class="form">
+    <form method='POST' action="{% url 'register' %}">
+        {% csrf_token %}
+        <h4>Create Account</h4>
+        <div class="error">
+              {% for error in errors  %}
+                <p>{{error}}</p>
+              {% endfor %}
+             {{error}} 
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{request.POST.name}}">
+          </div>
+
+        <div class="mb-3">
+          <label for="inputEmail" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="email" value="{{request.POST.email}}">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>      
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password">
+          <div id="emailHelp" class="form-text">Must contain at least 8 characters.</div>      
+        </div>
+        <div class="mb-3">
+          <label for="password2" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="password2" name="password2">
+        </div>
+
+        <input type="submit" class="btn-custom" id="submitForm" value="Create">
+      </form>
+    </div>
+
+    <div class="nav-links">
+
+      <a href="{% url 'index' %}">Login</a>
+      <a href="">Forgot password?</a>
+    </div>
+</div>
+
+
+{% endblock body %}
+
+{% block script %}
+<script src="{% static 'pets/js/verification.js' %}"></script>
+{% endblock script %}

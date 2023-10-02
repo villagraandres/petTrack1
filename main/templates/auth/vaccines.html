@@ -1,0 +1,106 @@
+{% extends 'adminLayout.html' %}
+{% load static %}
+{% block body %}
+<div>
+    <h1 class="text-center">Vaccinations of {{pet.name}}</h1>
+</div>
+<div class="container mt-4 ">
+  <button class="btn-2" data-bs-toggle="modal" data-bs-target="#exampleModal"type="button">Add a new vaccination +</button>
+
+  <form method="GET" class="mt-4" > 
+  <div class="input-group mb-3">
+    <label class="input-group-text" for="inputGroupSelect01">Filter by: </label>
+    <select class="form-select" id="inputGroupSelect01"  name="filter">
+      <option selected value="addition" {% if filter_mode == 'addition' %}selected{% endif %}>Date of Addition</option>
+      <option value="expired" {% if filter_mode == 'expired' %}selected{% endif %}>Expired</option>
+      <option value="appl" {% if filter_mode == 'appl' %}selected{% endif %}>Date of Application</option>   
+    </select>   
+    <input type="submit" value="Filter">
+  </div>
+</div>
+
+</form> 
+
+{% comment %} Modal  {% endcomment %}
+<div class="modal fade" id="exampleModal" tabindex="-1"  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New Vaccination</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger d-none d-block"  id="petAlert"role="alert">
+         Please complete all the inputs!
+        </div>
+        <form id="vaccForm" >
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="vaccname" class="col-form-label">Name:</label>
+            <input type="text" class="form-control" id="vaccname" name="name" >
+          </div>
+          <div class="mb-3">
+            <label for="application" class="col-form-label">Date of Application:</label>
+            <input type="date" class="form-control" id="application" name="application"  max="{{date}}">
+        </div>
+          <div class="mb-3">
+            <label for="expiration" class="col-form-label">Date of Expiration:</label>
+            <input type="date" class="form-control" id="expiration" name="expiration" min="{{date}}" >
+          </div>
+        
+          <input type="hidden" value="{{pet.id}}" id="petid" name="petid">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="vaccSubmit" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} <div class="card vac-card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title text-center">Vacc Name</h5>
+    <p class=" fs-4 text-success">Application: <br> Sept. 15, 2023  <i class="fa-solid fa-crutch"></i></p>
+    <p class=" fs-4 text-danger">Expiration:<br> Sept. 15, 2023  <i class="fa-solid fa-clock-rotate-left"></i></p>
+    <button type="button" class="btn btn-secondary">Update</button>
+      <button type="button" class="btn btn-danger">Delete</button>
+  </div>
+  
+</div> {% endcomment %}
+{% comment %} Modal Final {% endcomment %}
+
+<div class="containr">
+  <div class="row">
+    {% for vaccine in pet_vaccines %}
+      <div class="col-md-6">
+        <div class="card vac-card mb-4">
+          <div class="card-body">
+            <h4 class="card-title text-center fw-bold">{{ vaccine.name }}</h4>
+            <p class="fs-4 text-success">Application: <br> {{ vaccine.application }} <i class="fa-solid fa-crutch"></i></p>
+            <p class="fs-4 text-danger">Expiration:<br> {{ vaccine.expiration }} <i class="fa-solid fa-clock-rotate-left"></i></p>
+            <button type="button" class="btn btn-secondary">Update</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+      {% if forloop.counter|divisibleby:2 %}
+        </div><div class="row">
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock body %}
+
+{% block script %}
+<script src="{% static 'pets/js/vacc.js' %}"></script>
+
+
+{% endblock script %}
+
+
+
+

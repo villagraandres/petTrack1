@@ -1,0 +1,322 @@
+body{
+    font-family: 'Lato', sans-serif !important;
+   
+   
+}
+.brand{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.brand h1{
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 800 !important;
+    background: rgb(211,245,0);
+    background: linear-gradient(90deg, rgba(211,245,0,1) 0%, rgba(244,9,33,1) 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: .01px;
+    font-size: 70px;
+    margin-bottom: 0;
+}
+
+.brand p{
+    margin-top: 0;
+}
+
+.btn-custom {
+    background-color: #FE5F24 ;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-custom:hover {
+    background-color: #d4431c;
+  }
+
+  .disable{
+    opacity: 0.5;
+  }
+.index{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh; /* Para hacer que el contenedor ocupe el 100% de la altura de la pantalla */
+}
+
+@media (min-width: 992px) {
+    .container {
+      max-width: 700px; /* Ancho máximo del contenedor */
+    }
+  }
+
+.nav-links{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilos generales para el aside */
+
+aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 250px;
+  z-index: 1000;
+  overflow-y: auto;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  background-color: #FFF6F4; 
+}
+.barra{
+  display: none;
+}
+
+/* Estilos para el logo y el eslogan */
+.brand {
+  padding: 20px;
+  text-align: center;
+}
+
+.brand h4 {
+  font-family: 'Poppins', sans-serif !important;
+  font-weight: 800 !important;
+  background: rgb(211,245,0);
+  background: linear-gradient(90deg, rgba(211,245,0,1) 0%, rgba(244,9,33,1) 100%);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: .01px;
+
+  margin-bottom: 0;
+}
+
+.brand p {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  color: #8c8c8c;
+}
+
+/* Estilos para el botón de menú */
+.menu-btn {
+  display: none;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  border: none;
+  background-color: transparent;
+  color: #8c8c8c;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Estilos para los enlaces */
+aside a {
+  display: block;
+  padding: 15px 20px;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #3a3a3a;
+  transition: background-color 0.3s ease;
+}
+
+aside a:hover {
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+/* Estilos para el elemento activo */
+aside .active {
+  background-color: #f8f8f8;
+}
+
+/* Estilos para la sección "My Pets" */
+.myPets {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  margin: 20px 0;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #3a3a3a;
+}
+
+/* Estilos para la sección "Profile" */
+.profile {
+  margin: 20px 0;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #3a3a3a;
+}
+
+
+.main-container{
+  display: flex;
+  justify-content: center;
+}
+
+
+@media (max-width: 767px) {
+
+aside{
+  display: none;
+}
+.barra{
+  display: block;
+}
+}
+
+@media (min-width: 768px) and (max-width: 1075px) {
+  aside{
+    display: none;
+  }
+  .barra{
+    display: block;
+  }
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pet {
+  background-color: #525FE1;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  margin: 30px;
+  padding: 30px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.pet-body {
+  margin-left: 60px; 
+}
+
+@media (max-width: 767px) {
+  .pet {
+    background-color: #0A2ABA;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: 30px;
+    padding: 30px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pet-body {
+    margin-left: 0px;
+    margin-top: 30px;
+  }
+  
+}
+
+
+
+.pet-title {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.pet:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.pet-img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+
+
+a{
+  text-decoration: none;
+  color: #333;
+}
+
+.actions{
+  background-color: #FE5F24 ;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  margin: 30px;
+  padding: 30px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actions:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.vacc{
+  background-color: #ffb74c;
+  border: 1px solid black;
+  
+}
+
+/* Estilos base del botón */
+.btn-2 {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #525FE1;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilos responsivos */
+@media (max-width: 767px) {
+  .btn-2 {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Estilos al pasar el cursor sobre el botón */
+.btn-2:hover {
+  background-color: #0056b3;
+}
+
+.vac-card{
+border: 3px #0056b3 solid;
+}

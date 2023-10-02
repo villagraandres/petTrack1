@@ -1,0 +1,37 @@
+{% extends 'adminLayout.html' %}
+
+{% block body %}
+<h1 class="text-center">{{pet.name}} <img src="{{pet.pet_image.url}}" class="pet-img" alt="pet image"></h1>
+
+
+<a href="home">
+    <div class="actions mb-3"> 
+       <div >
+          <h5 class="pet-title text-center text-white">Appointments  <i class="fa-regular fa-calendar-check"></i></h5>
+       </div>
+    </div>
+</a>
+
+<a href="{% url 'vaccines' id=pet.id %}">
+   <div class="actions mb-3"> 
+      <div >
+         <h5 class="pet-title text-center text-white">Vaccinations  <i class="fa-solid fa-syringe"></i></h5>
+      </div>
+   </div>
+</a>
+
+
+
+{% endblock body %}
+
+{% block script %}
+
+
+
+{% endblock script %}
+
+
+
+
+
+
