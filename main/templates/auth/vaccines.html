@@ -49,6 +49,7 @@
           </div>
         
           <input type="hidden" value="{{pet.id}}" id="petid" name="petid">
+          <input type="hidden" value="" id="vaccid" name="vaccid">
         </form>
       </div>
       <div class="modal-footer">
@@ -61,7 +62,9 @@
 
 
 {% comment %} Modal Final {% endcomment %}
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button>
+
+
+
 <div class="container">
   <div class="row">
     {% for vaccine in pet_vaccines %}
@@ -71,7 +74,11 @@
             <h4 class="card-title text-center fw-bold">{{ vaccine.name }}</h4>
             <p class="fs-4 text-success">Application: <br> {{ vaccine.application }} <i class="fa-solid fa-crutch"></i></p>
             <p class="fs-4 text-danger">Expiration:<br> {{ vaccine.expiration }} <i class="fa-solid fa-clock-rotate-left"></i></p>
-            <button type="button" class="btn btn-secondary">Update</button>
+            
+            <button type="button" class="btn btn-secondary" type="button" data-bs-toggle="modal"
+              data-name="{{vaccine.name}}" data-id="{{vaccine.id}}" data-app="{{vaccine.application}}"
+               data-exp="{{vaccine.expiration}}" data-bs-target="#exampleModal">Update</button>
+
             <button type="button" class="btn btn-danger">Delete</button>
           </div>
         </div>

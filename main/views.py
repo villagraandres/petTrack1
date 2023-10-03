@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 from django.contrib.auth import login
 from django.core.mail import send_mail
@@ -7,6 +7,7 @@ from django.db import IntegrityError
 from .models import User, Pet, Vaccine
 from django.core.exceptions import PermissionDenied
 from datetime import datetime,date
+
 import secrets
 import string
 
@@ -163,12 +164,24 @@ def addvacc(request):
         application = request.POST.get('application')
         expiration = request.POST.get('expiration')
         petid = request.POST.get('petid')
+        vaccid= request.POST.get('vaccid')
 
+        if vaccid is not None:
+            vacc=Vaccine.objects.get(id=vaccid)
+            vacc.name=vaccname
+            vacc.expiration=expiration
+            vacc.application=application
+            vacc.save()
+            return JsonResponse({"message":"Ok"},status=201)
+        
+
+        
         
         vac=Vaccine(name=vaccname,application=application,expiration=expiration);
         vac.save();
         pet = Pet.objects.get(id=petid)
         pet.vacciness.add(vac)
         pet.save()
+        return JsonResponse({"message": "Created succesfully."}, status=201)
         
 
