@@ -15,18 +15,18 @@
       <option value="expired" {% if filter_mode == 'expired' %}selected{% endif %}>Expired</option>
       <option value="appl" {% if filter_mode == 'appl' %}selected{% endif %}>Date of Application</option>   
     </select>   
-    <input type="submit" value="Filter">
+    <input type="submit" class="btn btn-dark" value="Filter">
   </div>
 </div>
 
 </form> 
 
 {% comment %} Modal  {% endcomment %}
-<div class="modal fade" id="exampleModal" tabindex="-1"  aria-hidden="true">
+<div class="modal fade " id="exampleModal" tabindex="-1"  aria-hidden="true" >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">New Vaccination</h1>
+        <h1 class="modal-title fs-5" id="modalLabel">New Vaccination</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -65,11 +65,11 @@
 
 
 
-<div class="container">
+<div class="container mt-5">
   <div class="row">
     {% for vaccine in pet_vaccines %}
       <div class="col-md-6">
-        <div class="card vac-card mb-4">
+        <div class="card vac-card mb-5">
           <div class="card-body">
             <h4 class="card-title text-center fw-bold">{{ vaccine.name }}</h4>
             <p class="fs-4 text-success">Application: <br> {{ vaccine.application }} <i class="fa-solid fa-crutch"></i></p>
@@ -79,7 +79,7 @@
               data-name="{{vaccine.name}}" data-id="{{vaccine.id}}" data-app="{{vaccine.application}}"
                data-exp="{{vaccine.expiration}}" data-bs-target="#exampleModal">Update</button>
 
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-danger deleteBtns" data-id="{{vaccine.id}}">Delete</button>
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@
 
 {% block script %}
 <script src="{% static 'pets/js/vacc.js' %}"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 {% endblock script %}
 

@@ -7,9 +7,11 @@ from django.db import IntegrityError
 from .models import User, Pet, Vaccine
 from django.core.exceptions import PermissionDenied
 from datetime import datetime,date
-
+import json
 import secrets
 import string
+#import csrf
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -166,7 +168,7 @@ def addvacc(request):
         petid = request.POST.get('petid')
         vaccid= request.POST.get('vaccid')
 
-        if vaccid is not None:
+        if vaccid != '':
             vacc=Vaccine.objects.get(id=vaccid)
             vacc.name=vaccname
             vacc.expiration=expiration
@@ -176,6 +178,8 @@ def addvacc(request):
         
 
         
+        print(vaccname)
+        print(petid)
         
         vac=Vaccine(name=vaccname,application=application,expiration=expiration);
         vac.save();
@@ -185,3 +189,12 @@ def addvacc(request):
         return JsonResponse({"message": "Created succesfully."}, status=201)
         
 
+@csrf_exempt
+def delete(request):
+    if request.method== 'POST':
+         data=json.loads(request.body)
+         vaccId=data.get("id","");
+         vacc=Vaccine.objects.get(id=vaccId);
+         vacc.delete()   
+         return JsonResponse({"message":"deleted"})
+   
