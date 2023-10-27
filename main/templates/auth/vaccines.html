@@ -1,7 +1,10 @@
 {% extends 'adminLayout.html' %}
 {% load static %}
 {% block body %}
-<div>
+
+
+<a  class="btn-3" href="{% url "dashboard" id=pet.id %}" type="button"><i class="fa-solid fa-backward"></i> Back to Main Menu  </a>
+<div class="mt-5">
     <h1 class="text-center">Vaccinations of {{pet.name}}</h1>
 </div>
 <div class="container mt-4 ">
@@ -67,6 +70,7 @@
 
 <div class="container mt-5">
   <div class="row">
+    {% if pet_vaccines %}
     {% for vaccine in pet_vaccines %}
       <div class="col-md-6">
         <div class="card vac-card mb-5">
@@ -87,6 +91,10 @@
         </div><div class="row">
       {% endif %}
     {% endfor %}
+
+    {% else %}
+    <p class="text-center">No vaccines available.</p>
+  {% endif %}
   </div>
 </div>
 

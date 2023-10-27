@@ -4,10 +4,10 @@
 <h1 class="text-center">{{pet.name}} <img src="{{pet.pet_image.url}}" class="pet-img" alt="pet image"></h1>
 
 
-<a href="home">
+<a href="{% url "history" id=pet.id %}">
     <div class="actions mb-3"> 
        <div >
-          <h5 class="pet-title text-center text-white">Appointments  <i class="fa-regular fa-calendar-check"></i></h5>
+          <h5 class="pet-title text-center text-white">Medical History   <i class="fa-regular fa-calendar-check"></i></h5>
        </div>
     </div>
 </a>
@@ -19,6 +19,23 @@
       </div>
    </div>
 </a>
+
+<a href="{% url 'vaccines' id=pet.id %}">
+   <div class="actions mb-3"> 
+      <div >
+         <h5 class="pet-title text-center text-white">Medications  <i class="fa-solid fa-capsules"></i></i></h5>
+      </div>
+   </div>
+</a>
+
+<a href="{% url 'vaccines' id=pet.id %}">
+   <div class="actions mb-3"> 
+      <div >
+         <h5 class="pet-title text-center text-white">Weight and Growth Record <i class="fa-solid fa-weight-scale"></i></h5>
+      </div>
+   </div>
+</a>
+
 
 
 

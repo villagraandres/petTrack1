@@ -317,6 +317,33 @@ a{
   background-color: #0056b3;
 }
 
+
+.btn-3 {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ff7f50;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
 .vac-card{
 border: 3px #0056b3 solid;
+}
+
+input[type="date"]{
+  background-color: transparent;
+  color: #0056b3;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0px 0;
+  padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
 }

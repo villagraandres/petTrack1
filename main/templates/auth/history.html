@@ -1,0 +1,33 @@
+{% extends 'adminLayout.html' %}
+{% load static %}
+{% block body %}
+<a  class="btn-3" href="{% url "dashboard" id=pet.id %}" type="button"><i class="fa-solid fa-backward"></i> Back to Main Menu  </a>
+<div class="mb-4 mt-5">
+    <h1 class="text-center">Medical History</h1>
+    <p class="text-center text-muted">In this section you can add past medical appointments</p>
+    <button class="btn-2" data-bs-toggle="modal" data-bs-target="#exampleModal"type="button">Add  +</button>
+</div>
+
+<div class="filter-section">
+    <form  method="get" id="searchForm">
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Filter by: </label>
+            <select class="form-select" id="inputGroupSelect01"  name="filter">
+              <option selected value="addition" {% if filter_mode == 'addition' %}selected{% endif %}>Date of Addition</option>
+              <option value="expired" {% if filter_mode == 'expired' %}selected{% endif %}>Newest</option>
+              <option value="appl" {% if filter_mode == 'appl' %}selected{% endif %}>Oldest</option>   
+            </select>   
+            <input type="submit" class="btn btn-dark" value="Filter">
+          </div>
+        </div>
+    </form>
+    <div class="text-center">
+        <div class="filter-date">
+            <h4>Filter by date:</h4>
+            <input type="date" name="" id="">
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

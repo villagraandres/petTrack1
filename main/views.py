@@ -176,10 +176,6 @@ def addvacc(request):
             vacc.save()
             return JsonResponse({"message":"Ok"},status=201)
         
-
-        
-        print(vaccname)
-        print(petid)
         
         vac=Vaccine(name=vaccname,application=application,expiration=expiration);
         vac.save();
@@ -198,3 +194,10 @@ def delete(request):
          vacc.delete()   
          return JsonResponse({"message":"deleted"})
    
+
+def history(request,id):  
+    pet=Pet.objects.get(id=id)
+   
+    return render(request,'auth/history.html',{
+        'pet':pet
+    });
