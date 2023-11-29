@@ -1,12 +1,67 @@
 {% extends 'adminLayout.html' %}
 {% load static %}
 {% block body %}
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="addHistory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="vaccForm" >
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="vaccname" class="col-form-label">Subject:</label>
+              <input type="text" class="form-control" id="subject" name="subject" >
+            </div>
+            <div class="mb-3">
+              <label for="application" class="col-form-label">Date:</label>
+              <input type="date" class="form-control" id="history_date" name="history_date"  max="{{date}}">
+          </div>
+          <div class="mb-3">
+            <label for="application" class="col-form-label">Description:</label>
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Leave a comment here" id="description" name="prescription" style="height: 100px"></textarea>
+              <label for="floatingTextarea2">Here you can put the doctor comments</label>
+            </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="application" class="col-form-label">Prescription:</label>
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="prescription" name="prescription" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">You can leave it blank</label>
+          </div>
+      </div>
+          
+            <input type="hidden" value="{{pet.id}}" id="petid" name="petid">
+            <input type="hidden" value="" id="vaccid" name="vaccid">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+
+
 <a  class="btn-3" href="{% url "dashboard" id=pet.id %}" type="button"><i class="fa-solid fa-backward"></i> Back to Main Menu  </a>
 <div class="mb-4 mt-5">
     <h1 class="text-center">Medical History</h1>
     <p class="text-center text-muted">In this section you can add past medical appointments</p>
-    <button class="btn-2" data-bs-toggle="modal" data-bs-target="#exampleModal"type="button">Add  +</button>
+    <button class="btn-2" data-bs-toggle="modal" data-bs-target="#addHistory" type="button">Add  +</button>
 </div>
+
+
+
+
 
 <div class="filter-section">
     <form  method="get" id="searchForm">

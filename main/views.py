@@ -197,7 +197,10 @@ def delete(request):
 
 def history(request,id):  
     pet=Pet.objects.get(id=id)
+    current_date = datetime.now().date()
+    formatted_date = current_date.strftime('%Y-%m-%d')
    
     return render(request,'auth/history.html',{
-        'pet':pet
+        'pet':pet,
+        'date':formatted_date
     });

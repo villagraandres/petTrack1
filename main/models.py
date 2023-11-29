@@ -30,3 +30,13 @@ class Pet(models.Model):
 
     def __str__(self):
         return f"{self.name} of {self.owner} id: {self.id}";
+
+
+class History(models.Model):
+    subject=models.CharField(max_length=100);
+    date=models.DateField()
+    description=models.TextField()
+    prescription=models.TextField()
+
+    def __str__(self):
+        return f"{self.subject}"
