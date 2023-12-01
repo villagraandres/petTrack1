@@ -44,12 +44,13 @@
       </div>
           
             <input type="hidden" value="{{pet.id}}" id="petid" name="petid">
+            <input type="hidden" value="{{appo.id}}" id="appoid" name="appoid">
           
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="historySubmit">Add</button>
+          <button type="button" class="btn btn-primary" id="historyEdit">Add</button>
         </div>
       </div>
     </div>
@@ -94,6 +95,7 @@
 {% block script %}
 <script src="{% static 'pets/js/history.js' %}"></script>
 <script src="https://kit.fontawesome.com/6c76bbdb90.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 {% endblock script %}
 

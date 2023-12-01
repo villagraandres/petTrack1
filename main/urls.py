@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/addvacc',views.addvacc,name="addvacc"),
     path('api/delete',views.delete,name="delete"),
     path('api/addHistory',views.addHistory,name="addHistory"),
-    path('pet/appo/<int:id>',views.appo,name="appo")
+    path('pet/appo/<int:id>',views.appo,name="appo"),
+    path('api/editHistory',views.editHistory,name="editHistory"),
 
 ]

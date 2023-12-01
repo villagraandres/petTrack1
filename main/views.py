@@ -239,3 +239,22 @@ def appo(request, id):
         'pet_id': pet.id	
     })
 
+def editHistory(request):
+     if request.method=='POST':
+        subject=request.POST.get('subject')
+        doctor=request.POST.get('doctor')
+        date=request.POST.get('date')
+        description=request.POST.get('description')
+        prescription=request.POST.get('prescription')
+        historyid=request.POST.get('appoid')
+     
+        history=History.objects.get(id=historyid)
+        history.subject=subject
+        history.doctor=doctor
+        history.date=date
+        history.description=description
+        history.prescription=prescription;
+        history.save();
+
+        return JsonResponse({'message': 'History added successfully'}, status=201)
+    
