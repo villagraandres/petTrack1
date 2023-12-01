@@ -12,7 +12,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="vaccForm" >
+          <form id="vaccForm" id="historyForm" >
             {% csrf_token %}
             <div class="mb-3">
               <label for="vaccname" class="col-form-label">Subject:</label>
@@ -25,7 +25,7 @@
           <div class="mb-3">
             <label for="application" class="col-form-label">Description:</label>
             <div class="form-floating">
-              <textarea class="form-control" placeholder="Leave a comment here" id="description" name="prescription" style="height: 100px"></textarea>
+              <textarea class="form-control" placeholder="Leave a comment here" id="description" name="description" style="height: 100px"></textarea>
               <label for="floatingTextarea2">Here you can put the doctor comments</label>
             </div>
         </div>
@@ -44,7 +44,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" id="historySubmit">Add</button>
         </div>
       </div>
     </div>
@@ -86,3 +86,8 @@
 
 
 {% endblock body %}
+
+{% block script %}
+<script src="{% static 'pets/js/history.js' %}"></script>
+{% endblock script %}
+

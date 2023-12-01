@@ -19,7 +19,6 @@ function add(e){
     let expiration=document.querySelector('#expiration')
     let application=document.querySelector('#application')
     const vaccid=document.querySelector('#vaccid').value;
-    console.log(vaccid);
     document.querySelector('#vaccSubmit').disabled=true;
     
     const vaccSubmit=exampleModal.querySelector('#vaccSubmit');
@@ -28,23 +27,26 @@ function add(e){
     label.textContent="Add Vaccination"
     
 
-
+   
+    let errors = [];
     if(name.value.trim()==''){
-        console.log('error');
         document.querySelector('#vaccSubmit').disabled=false;
-        name.classList.add('border','border-danger')
-        return
+        errors.push(name);
     }
     if(expiration.value==''){
-        console.log('error');
         document.querySelector('#vaccSubmit').disabled=false;
-        return
+        errors.push(expiration);
     }
     if(application.value==''){
-        console.log('error');
         document.querySelector('#vaccSubmit').disabled=false;
-        return
+       errors.push(application)
     }
+
+    if (errors.length > 0) {
+        handleErrors(errors);
+        return; // Detiene el flujo si hay errores
+    }
+
 
     const info= new FormData(form);
     if(vaccid !==''){
@@ -58,7 +60,7 @@ function add(e){
     }).then(message=>{
       
           Swal.fire(
-            'The vaccination was created succesfully',
+            'The vaccine was created succesfully',
             '',
             'success'
           )
@@ -143,4 +145,14 @@ function deleteVacc(id){
          
         }
       })
+}
+
+
+function handleErrors(inputs) {
+    inputs.forEach(input => {
+        input.classList.add('border', 'border-danger');
+        setTimeout(() => {
+            input.classList.remove('border', 'border-danger');
+        }, 2000);
+    });
 }

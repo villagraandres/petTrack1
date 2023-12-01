@@ -17,7 +17,17 @@ class Vaccine(models.Model):
 
     def __str__(self):
         return f"{self.name} expiration: {self.expiration}"
+    
+class History(models.Model):
+    subject=models.CharField(max_length=100);
+    date=models.DateField()
+    description=models.TextField()
+    prescription=models.TextField()
 
+    def __str__(self):
+        return f"{self.subject}"
+    
+    
 class Pet(models.Model):
     name=models.CharField(max_length=50);
     specie=models.CharField(max_length=50);
@@ -27,16 +37,9 @@ class Pet(models.Model):
     owner=models.ForeignKey(User,on_delete=models.CASCADE,related_name="pets");
     pet_image=models.ImageField(null=True,blank=True,upload_to="images/")
     vacciness=models.ManyToManyField(Vaccine)
+    histoy=models.ManyToManyField(History)
 
     def __str__(self):
         return f"{self.name} of {self.owner} id: {self.id}";
 
 
-class History(models.Model):
-    subject=models.CharField(max_length=100);
-    date=models.DateField()
-    description=models.TextField()
-    prescription=models.TextField()
-
-    def __str__(self):
-        return f"{self.subject}"
