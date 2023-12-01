@@ -12,7 +12,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="vaccForm" id="historyForm" >
+          <form id="historyForm" >
             {% csrf_token %}
             <div class="mb-3">
               <label for="vaccname" class="col-form-label">Subject:</label>
@@ -20,7 +20,7 @@
             </div>
             <div class="mb-3">
               <label for="application" class="col-form-label">Date:</label>
-              <input type="date" class="form-control" id="history_date" name="history_date"  max="{{date}}">
+              <input type="date" class="form-control" id="date" name="date"  max="{{date}}">
           </div>
           <div class="mb-3">
             <label for="application" class="col-form-label">Description:</label>

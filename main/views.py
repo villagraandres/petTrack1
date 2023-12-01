@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import login
 from django.core.mail import send_mail
 from django.db import IntegrityError
-from .models import User, Pet, Vaccine
+from .models import User, Pet, Vaccine, History
 from django.core.exceptions import PermissionDenied
 from datetime import datetime,date
 import json
@@ -204,3 +204,14 @@ def history(request,id):
         'pet':pet,
         'date':formatted_date
     });
+
+def addHistory(request):
+    if request.method=='POST':
+        subject=request.POST.get('subject')
+        date=request.POST.get('date')
+        description=request.POST.get('description')
+        prescription=request.POST.get('prescription')
+
+        history=History(subject=subject,date=date,description=description,prescription=prescription);
+        history.save()
+        return JsonResponse({'message': 'History added successfully'}, status=201)

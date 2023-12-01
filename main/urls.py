@@ -12,7 +12,7 @@ urlpatterns = [
     path('pet/history/<int:id>',views.history,name="history" ),
     path('api/addPet',views.addPet,name="addPet"), #API ZONE
     path('api/addvacc',views.addvacc,name="addvacc"),
-    path('filtervac',views.addvacc,name="filtervac"),
     path('api/delete',views.delete,name="delete"),
+    path('api/addHistory',views.addHistory,name="addHistory"),
 
 ]

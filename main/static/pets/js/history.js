@@ -7,7 +7,7 @@ function add(e){
 
     const form=document.querySelector('#historyForm');
     let subject=document.querySelector('#subject');
-    let date=document.querySelector('#history_date');
+    let date=document.querySelector('#date');
     let description=document.querySelector('#description');
     let prescription=document.querySelector('#prescription');
 
@@ -17,7 +17,7 @@ function add(e){
     if (subject.value.trim() === '') {
         errors.push(subject);
     }
-    if (date.value.trim() === '') {
+    if (date.value === '') {
         errors.push(date);
     }
     if(description.value.trim()===''){
@@ -34,7 +34,12 @@ function add(e){
 
    const info=new FormData(form);
 
-   
+   fetch('/api/addHistory',{
+    method:'POST',
+    body:info
+   }).then(message=>{
+
+   })
 }
 
 function handleErrors(inputs) {

@@ -37,7 +37,7 @@ class Pet(models.Model):
     owner=models.ForeignKey(User,on_delete=models.CASCADE,related_name="pets");
     pet_image=models.ImageField(null=True,blank=True,upload_to="images/")
     vacciness=models.ManyToManyField(Vaccine)
-    histoy=models.ManyToManyField(History)
+    history=models.ManyToManyField(History)
 
     def __str__(self):
         return f"{self.name} of {self.owner} id: {self.id}";
