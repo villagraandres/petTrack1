@@ -197,12 +197,17 @@ def delete(request):
 
 def history(request,id):  
     pet=Pet.objects.get(id=id)
+    pet_hist=pet.history.all
     current_date = datetime.now().date()
     formatted_date = current_date.strftime('%Y-%m-%d')
+
+    if pet.owner.id is not request.user.id:
+           raise PermissionDenied()
    
     return render(request,'auth/history.html',{
         'pet':pet,
-        'date':formatted_date
+        'date':formatted_date,
+        'pet_hist':pet_hist
     });
 
 def addHistory(request):
@@ -211,7 +216,22 @@ def addHistory(request):
         date=request.POST.get('date')
         description=request.POST.get('description')
         prescription=request.POST.get('prescription')
+        petid=request.POST.get('petid')
 
+     
         history=History(subject=subject,date=date,description=description,prescription=prescription);
         history.save()
+
+        pet = Pet.objects.get(id=petid)
+        pet.history.add(history)
+        pet.save()
+
         return JsonResponse({'message': 'History added successfully'}, status=201)
+
+
+def appo(request, id):
+    appo = History.objects.get(id=id)
+    return render(request, 'auth/appo.html', {
+        'appo': appo
+    })
+

@@ -39,7 +39,7 @@
       </div>
           
             <input type="hidden" value="{{pet.id}}" id="petid" name="petid">
-            <input type="hidden" value="" id="vaccid" name="vaccid">
+          
           </form>
         </div>
         <div class="modal-footer">
@@ -75,6 +75,7 @@
             <input type="submit" class="btn btn-dark" value="Filter">
           </div>
         </div>
+        
     </form>
     <div class="text-center">
         <div class="filter-date">
@@ -85,9 +86,28 @@
 </div>
 
 
+<div class="container mt-4">
+{% for hist in pet_hist %}
+  
+<div class="card text-center">
+
+  <div class="card-body">
+    <h5 class="card-title">{{hist.date}}</h5>
+    <p class="card-text">{{hist.subject}}.</p>
+    <a href="{% url "appo"   id=hist.id %}" class="btn btn-primary">See details</a>
+  </div>
+
+</div>
+
+{% endfor %}
+
+</div>
 {% endblock body %}
 
+
 {% block script %}
+
 <script src="{% static 'pets/js/history.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {% endblock script %}
 

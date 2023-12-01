@@ -1,0 +1,21 @@
+{% extends 'adminLayout.html' %}
+{% load static %}
+
+
+{% block body %}
+<div class="container">
+
+
+    <h1 class="text-center">{{appo.date}}</h1>
+    <h3>Subject: {{appo.subject}}</h3>
+    <h4>Description:</h4>
+    <p>{{appo.description}}</p>
+    <h4>Preescription:</h4>
+    <p>{{appo.prescription}}</p>
+
+</div>
+{% endblock body %}
+
+
+
+

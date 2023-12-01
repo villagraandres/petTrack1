@@ -10,9 +10,10 @@ urlpatterns = [
     path('pet/<int:id>',views.dashboard,name="dashboard" ),
     path('pet/vaccs/<int:id>',views.vaccines,name="vaccines" ),
     path('pet/history/<int:id>',views.history,name="history" ),
-    path('api/addPet',views.addPet,name="addPet"), #API ZONE
+    path('api/addPet',views.addPet,name="addPet"), 
     path('api/addvacc',views.addvacc,name="addvacc"),
     path('api/delete',views.delete,name="delete"),
     path('api/addHistory',views.addHistory,name="addHistory"),
+    path('pet/appo/<int:id>',views.appo,name="appo")
 
 ]

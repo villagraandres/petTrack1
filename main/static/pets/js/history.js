@@ -10,20 +10,26 @@ function add(e){
     let date=document.querySelector('#date');
     let description=document.querySelector('#description');
     let prescription=document.querySelector('#prescription');
+    const petid=document.querySelector('#petid');
+    document.querySelector('#vaccSubmit').disabled=true;
 
    
     let errors = [];
 
     if (subject.value.trim() === '') {
+        document.querySelector('#vaccSubmit').disabled=false;
         errors.push(subject);
     }
     if (date.value === '') {
+        document.querySelector('#vaccSubmit').disabled=false;
         errors.push(date);
     }
     if(description.value.trim()===''){
+        document.querySelector('#vaccSubmit').disabled=false;
         errors.push(description)
     }
     if(prescription.value.trim()===''){
+        document.querySelector('#vaccSubmit').disabled=false;
         errors.push(prescription)
     }
 
@@ -38,6 +44,16 @@ function add(e){
     method:'POST',
     body:info
    }).then(message=>{
+
+
+    Swal.fire(
+        'The appointment was created succesfully',
+        '',
+        'success'
+      )
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
 
    })
 }
