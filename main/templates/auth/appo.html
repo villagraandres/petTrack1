@@ -3,15 +3,21 @@
 
 
 {% block body %}
+<a  class="btn-3" href="{% url "history" id=pet_id %}" type="button"><i class="fa-solid fa-backward"></i> Back to Main Menu  </a>
 <div class="container">
 
 
     <h1 class="text-center">{{appo.date}}</h1>
     <h3>Subject: {{appo.subject}}</h3>
-    <h4>Description:</h4>
-    <p>{{appo.description}}</p>
-    <h4>Preescription:</h4>
-    <p>{{appo.prescription}}</p>
+
+    <div class="mt-4">
+        <h4>Description:</h4>
+        <p>{{appo.description}}</p>
+        <h4>Preescription:</h4>
+        <p>{{appo.prescription}}</p>
+
+    </div>
+
 
 </div>
 {% endblock body %}

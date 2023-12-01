@@ -231,7 +231,10 @@ def addHistory(request):
 
 def appo(request, id):
     appo = History.objects.get(id=id)
+    pet = Pet.objects.filter(history__id=id).first()  # Obtiene la mascota relacionada con la historia
+    print(pet.id)
     return render(request, 'auth/appo.html', {
-        'appo': appo
+        'appo': appo,
+        'pet_id': pet.id	
     })
 
