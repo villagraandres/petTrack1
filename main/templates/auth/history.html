@@ -8,22 +8,26 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Appointment</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form id="historyForm" >
             {% csrf_token %}
             <div class="mb-3">
-              <label for="vaccname" class="col-form-label">Subject:</label>
+              <label for="subject" class="col-form-label">Subject:</label>
               <input type="text" class="form-control" id="subject" name="subject" >
             </div>
             <div class="mb-3">
-              <label for="application" class="col-form-label">Date:</label>
+              <label for="doctor" class="col-form-label">Doctor:</label>
+              <input type="text" class="form-control" id="doctor" name="doctor" >
+            </div>
+            <div class="mb-3">
+              <label for="date" class="col-form-label">Date:</label>
               <input type="date" class="form-control" id="date" name="date"  max="{{date}}">
           </div>
           <div class="mb-3">
-            <label for="application" class="col-form-label">Description:</label>
+            <label for="description" class="col-form-label">Description:</label>
             <div class="form-floating">
               <textarea class="form-control" placeholder="Leave a comment here" id="description" name="description" style="height: 100px"></textarea>
               <label for="floatingTextarea2">Here you can put the doctor comments</label>
@@ -31,7 +35,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="application" class="col-form-label">Prescription:</label>
+          <label for="prescription" class="col-form-label">Prescription:</label>
           <div class="form-floating">
             <textarea class="form-control" placeholder="Leave a comment here" id="prescription" name="prescription" style="height: 100px"></textarea>
             <label for="floatingTextarea2">You can leave it blank</label>

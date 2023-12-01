@@ -23,6 +23,7 @@ class History(models.Model):
     date=models.DateField()
     description=models.TextField()
     prescription=models.TextField()
+    doctor=models.CharField(max_length=60)
 
     def __str__(self):
         return f"{self.subject}"

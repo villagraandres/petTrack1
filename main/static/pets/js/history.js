@@ -1,5 +1,17 @@
 document.addEventListener('DOMContentLoaded',()=>{
-    document.querySelector('#historySubmit').addEventListener('click',add);
+    addSubmit=document.querySelector('#historySubmit')
+    editSubmit=document.querySelector('#editSubmit')
+    const exampleModal = document.getElementById('addHistory');
+
+    if(exampleModal){ exampleModal.addEventListener('show.bs.modal',edit)}
+
+    
+    if (addSubmit){
+        addSubmit.addEventListener('click',add)
+    }
+
+
+    
 })
 
 function add(e){
@@ -7,11 +19,12 @@ function add(e){
 
     const form=document.querySelector('#historyForm');
     let subject=document.querySelector('#subject');
+    let doctor=document.querySelector('#doctor');
     let date=document.querySelector('#date');
     let description=document.querySelector('#description');
     let prescription=document.querySelector('#prescription');
     const petid=document.querySelector('#petid');
-    document.querySelector('#vaccSubmit').disabled=true;
+
 
    
     let errors = [];
@@ -19,6 +32,10 @@ function add(e){
     if (subject.value.trim() === '') {
         document.querySelector('#vaccSubmit').disabled=false;
         errors.push(subject);
+    }
+    if (doctor.value.trim() === '') {
+        document.querySelector('#vaccSubmit').disabled=false;
+        errors.push(doctor);
     }
     if (date.value === '') {
         document.querySelector('#vaccSubmit').disabled=false;
@@ -56,6 +73,19 @@ function add(e){
       }, 1500);
 
    })
+}
+
+function edit(e){
+    const button= e.relatedTarget;
+
+    const subject=button.getAttribute('data-subject')
+    const doctor=button.getAttribute('data-doctor')
+    const date=button.getAttribute('data-date');
+    const description=button.getAttribute('data-description');
+    const prescription=button.getAttribute('data-prescription');
+    
+    console.log(prescription);
+    
 }
 
 function handleErrors(inputs) {

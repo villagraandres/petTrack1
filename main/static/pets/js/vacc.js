@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded',()=>{
     document.querySelector('#vaccSubmit').addEventListener('click',add);
     const exampleModal = document.getElementById('exampleModal');
+
     if(exampleModal){ exampleModal.addEventListener('show.bs.modal',edit)}
+
+    
     document.querySelectorAll('.deleteBtns').forEach(btn=>{
         btn.addEventListener('click',()=>{
             deleteVacc(btn.dataset.id)

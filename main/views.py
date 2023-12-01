@@ -213,13 +213,14 @@ def history(request,id):
 def addHistory(request):
     if request.method=='POST':
         subject=request.POST.get('subject')
+        doctor=request.POST.get('doctor')
         date=request.POST.get('date')
         description=request.POST.get('description')
         prescription=request.POST.get('prescription')
         petid=request.POST.get('petid')
 
      
-        history=History(subject=subject,date=date,description=description,prescription=prescription);
+        history=History(subject=subject,doctor=doctor,date=date,description=description,prescription=prescription);
         history.save()
 
         pet = Pet.objects.get(id=petid)
