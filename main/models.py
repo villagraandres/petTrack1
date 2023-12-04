@@ -13,7 +13,7 @@ class User(AbstractUser):
 class Vaccine(models.Model):
     name=models.CharField(max_length=60);
     application=models.DateField();
-    expiration=models.DateField();
+    expiration=models.DateField();  
 
     def __str__(self):
         return f"{self.name} expiration: {self.expiration}"
@@ -44,6 +44,15 @@ class Pet(models.Model):
 
     def __str__(self):
         return f"{self.name} of {self.owner} id: {self.id}";
+
+    def delete(self,*args,**kwargs):
+        vaccines = list(self.vacciness.all())
+        history=list(self.history.all())
+        super().delete(*args,**kwargs)
+        for vaccine in vaccines:
+            vaccine.delete()
+        for history in history:
+            history.delete()
 
 class Weight(models.Model):
     pet=models.ForeignKey(Pet,on_delete=models.CASCADE,related_name="weights")

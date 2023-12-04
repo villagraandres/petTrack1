@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import login
 from django.core.mail import send_mail
 from django.db import IntegrityError
-from .models import User, Pet, Vaccine, History
+from .models import User, Pet, Vaccine, History, Weight
 from django.core.exceptions import PermissionDenied
 from datetime import datetime,date
 import json
@@ -121,6 +121,9 @@ def addPet(request):
             
         pet=Pet(name=name,birth=birth,specie=specie,sex=sex,weight=weight,owner=request.user,pet_image=file)
         pet.save()
+        current_date = datetime.now().date()
+        weightRegister=Weight(pet=pet,date=current_date,weight=weight)
+        weightRegister.save()
         return HttpResponse(request.POST['file']);
 
 def dashboard(request,id):
@@ -287,5 +290,24 @@ def deleteHistory(request):
           
        
 def weightControl(request,id):
-    pass
+    registers=Weight.objects.filter(pet=id)
+    first_date=registers.first().date
+    formatted_date=first_date.strftime('%Y-%m-%d')
+    return render(request, 'auth/weightControl.html', {
+        'records':registers,
+        'pet_id':id,
+        'first_formatted':formatted_date
+    })
+
+def addWeight(request):
+    if request.method=='POST':
+        weight=request.POST.get('weight')
+        date=request.POST.get('date')
+        petid=request.POST.get('petid')
+        pet=Pet.objects.get(id=petid)
+
+        weightRegister=Weight(pet=pet,date=date,weight=weight)
+        weightRegister.save()
+        return JsonResponse({'message': 'Weight added successfully'}, status=201)
+
     

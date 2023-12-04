@@ -1,0 +1,74 @@
+{% extends 'adminLayout.html' %}
+{% load static %}
+
+{% block body %}
+<h1 class="text-center">Weight Control</h1>
+
+<div class="container mt-4">
+    <button class="btn-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Add a new record +</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">New Record</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="weightForm" >
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="date" class="col-form-label">Date:</label>
+                  <input type="date" class="form-control" id="date" name="date"  min="{{first_formatted}}">
+              </div>
+              <div class="mb-3">
+                <label for="weight" class="col-form-label">Weight:</label>
+                <input type="number" class="form-control" id="weight" name="weight"  >
+            </div>
+                
+              
+                <input type="hidden" value="{{pet_id}}" id="petid" name="petid">
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="weightSubmit" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <table class="table mt-4">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Weight(lbs)</th>
+            <th scope="col">Actions</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+    
+
+          {% for record in records  %}
+            <tr>
+                <th scope="row">{{ record.date }}</th>
+                <td>{{ record.weight }}</td>
+                <td>Delete</td>
+            </tr>
+
+          {% endfor %}
+        
+        </tbody>
+      </table>
+</div>
+
+{% endblock body %}
+
+{% block script %}
+<script src="{% static 'pets/js/weight.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+{% endblock script %}
