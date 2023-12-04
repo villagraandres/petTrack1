@@ -293,6 +293,8 @@ def weightControl(request,id):
     registers=Weight.objects.filter(pet=id)
     first_date=registers.first().date
     formatted_date=first_date.strftime('%Y-%m-%d')
+
+    
     return render(request, 'auth/weightControl.html', {
         'records':registers,
         'pet_id':id,
@@ -309,5 +311,16 @@ def addWeight(request):
         weightRegister=Weight(pet=pet,date=date,weight=weight)
         weightRegister.save()
         return JsonResponse({'message': 'Weight added successfully'}, status=201)
+    
+def getWeight(request):
+     petId=request.GET.get('pet_id');
+     weights_data = Weight.objects.filter(pet_id=petId).order_by('date')
+     dates = [entry.date.strftime('%Y-%m-%d') for entry in weights_data]
+     weights = [entry.weight for entry in weights_data]
+     data = {
+        'dates': dates,
+        'weights': weights,
+    } 
+     return JsonResponse(data)
 
     

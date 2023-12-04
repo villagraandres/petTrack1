@@ -19,5 +19,6 @@ urlpatterns = [
     path('api/deleteHistory',views.deleteHistory,name="deleteHistory"),
     path('pet/weightControl/<int:id>',views.weightControl,name="weightControl"),
     path('api/addWeight',views.addWeight,name="addWeight"),
+    path('api/getWeight',views.getWeight,name="getWeight"),
 
 ]

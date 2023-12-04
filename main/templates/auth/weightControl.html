@@ -19,7 +19,7 @@
                 {% csrf_token %}
                 <div class="mb-3">
                   <label for="date" class="col-form-label">Date:</label>
-                  <input type="date" class="form-control" id="date" name="date"  min="{{first_formatted}}">
+                  <input type="date" class="form-control" id="date" name="date"  value="{{first_formatted}}" >
               </div>
               <div class="mb-3">
                 <label for="weight" class="col-form-label">Weight:</label>
@@ -61,11 +61,20 @@
         
         </tbody>
       </table>
+
+
+      
 </div>
 
+<canvas id="weightChart" width="800" height="400"></canvas>
 {% endblock body %}
 
 {% block script %}
+<!-- Importa el adaptador de fecha de Chart.js -->
+
+<!-- Agrega esto en tu archivo HTML -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script src="{% static 'pets/js/weight.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
