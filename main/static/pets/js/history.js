@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(dateBtn){
        dateBtn.addEventListener('change',filterDate)
     }
+    
 });
 
 

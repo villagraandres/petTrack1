@@ -10,7 +10,6 @@ from datetime import datetime,date
 import json
 import secrets
 import string
-#import csrf
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -287,5 +286,6 @@ def deleteHistory(request):
          return HttpResponseRedirect(reverse('home'))
           
        
-
+def weightControl(request,id):
+    pass
     

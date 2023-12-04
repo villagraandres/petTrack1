@@ -28,6 +28,8 @@ class History(models.Model):
     def __str__(self):
         return f"{self.subject}"
     
+
+    
     
 class Pet(models.Model):
     name=models.CharField(max_length=50);
@@ -43,4 +45,10 @@ class Pet(models.Model):
     def __str__(self):
         return f"{self.name} of {self.owner} id: {self.id}";
 
+class Weight(models.Model):
+    pet=models.ForeignKey(Pet,on_delete=models.CASCADE,related_name="weights")
+    date=models.DateField()
+    weight=models.IntegerField()
 
+    def __str__(self):
+        return f"{self.weight} kg"

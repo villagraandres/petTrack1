@@ -17,5 +17,6 @@ urlpatterns = [
     path('pet/appo/<int:id>',views.appo,name="appo"),
     path('api/editHistory',views.editHistory,name="editHistory"),
     path('api/deleteHistory',views.deleteHistory,name="deleteHistory"),
+    path('pet/weightControl/<int:id>',views.weightControl,name="weightControl"),
 
 ]
