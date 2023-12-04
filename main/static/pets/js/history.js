@@ -9,12 +9,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const addSubmit = document.querySelector('#historySubmit');
     const editSubmit = document.querySelector('#historyEdit');
-
+    const deleteSubmit = document.querySelector('#deleteSubmit');
+    const dateBtn=document.querySelector('#filterDate');
+   
     if (addSubmit) {
         addSubmit.addEventListener('click', add);
     }
     if(editSubmit){
         editSubmit.addEventListener('click',edit);
+    }
+    if(deleteSubmit){
+        deleteSubmit.addEventListener('click',deleteHistory)
+    }
+    if(dateBtn){
+       dateBtn.addEventListener('change',filterDate)
     }
 });
 
@@ -88,19 +96,22 @@ function editModal(e){
     const date=button.getAttribute('data-date');
     const description=button.getAttribute('data-description');
     const prescription=button.getAttribute('data-prescription');
+    if(date){
+        var dateObj = new Date(date);
+        var formatedExp = dateObj.toISOString().split('T')[0];
+        exampleModal.querySelector('#date').value=formatedExp;
+    }
 
-    var dateObj = new Date(date);
-    var formatedExp = dateObj.toISOString().split('T')[0];
+    
 
    
     exampleModal.querySelector('#subject').value=subject;
     exampleModal.querySelector('#doctor').value=doctor;
-    exampleModal.querySelector('#date').value=formatedExp;
+    
     exampleModal.querySelector('#description').value=description;
     exampleModal.querySelector('#prescription').value=prescription;
 }
 function edit(e){
-    e.preventDefault();
     e.preventDefault();
 
     const form=document.querySelector('#historyForm');
@@ -147,7 +158,7 @@ function edit(e){
 
 
     Swal.fire(
-        'The appointment was created succesfully',
+        'The appointment was edited succesfully',
         '',
         'success'
       )
@@ -157,6 +168,59 @@ function edit(e){
 
    })
 }
+
+
+function deleteHistory(e){
+    id=parseInt(e.srcElement.dataset.id)
+    petid=parseInt(e.srcElement.dataset.pet)
+    console.log(petid);
+    
+
+     Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+            fetch('/api/deleteHistory',{
+                method:'POST',
+                body:JSON.stringify({id:id})
+            })
+            .then(response=>response.json)
+            .then(message=>{
+                Swal.fire(
+                    'Deleted!',
+                    'The Vaccine has been deleted.',
+                    'success'
+                  )
+                  window.location.href='/pet/history/'+petid;
+                 
+            })
+
+          
+
+         
+        }
+      }) 
+}
+function filterDate(e){
+    console.log(e.srcElement.value);
+    //send this information to the backend
+    const petid=document.querySelector('#petid');
+    const date=e.srcElement.value;
+    fetch('/api/filterHistory',{
+        method:'POST',
+        body:JSON.stringify({petid:petid.value,date:date})
+    })
+    .then(response=>response.json())
+
+
+}
 function handleErrors(inputs) {
     inputs.forEach(input => {
         input.classList.add('border', 'border-danger');
@@ -165,3 +229,4 @@ function handleErrors(inputs) {
         }, 2000);
     });
 }
+

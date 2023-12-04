@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 from django.urls import reverse
 from django.contrib.auth import login
 from django.core.mail import send_mail
@@ -197,9 +197,22 @@ def delete(request):
 
 def history(request,id):  
     pet=Pet.objects.get(id=id)
-    pet_hist=pet.history.all
+    pet_hist=pet.history.all()
+    historySorted=pet_hist.order_by('-id')
     current_date = datetime.now().date()
     formatted_date = current_date.strftime('%Y-%m-%d')
+
+
+    dateFilter=request.GET.get('date');
+    filterMode=request.GET.get('filter');
+    if dateFilter:
+        historySorted=pet_hist.filter(date=dateFilter).order_by('-id')
+    
+    if filterMode:
+        if filterMode=='newest':
+            historySorted=pet_hist.order_by('-date')
+        elif filterMode=='oldest':
+            historySorted=pet_hist.order_by('date')
 
     if pet.owner.id is not request.user.id:
            raise PermissionDenied()
@@ -207,7 +220,8 @@ def history(request,id):
     return render(request,'auth/history.html',{
         'pet':pet,
         'date':formatted_date,
-        'pet_hist':pet_hist
+        'pet_hist':historySorted,
+        'filter_mode':filterMode
     });
 
 def addHistory(request):
@@ -231,12 +245,17 @@ def addHistory(request):
 
 
 def appo(request, id):
+    
     appo = History.objects.get(id=id)
-    pet = Pet.objects.filter(history__id=id).first()  # Obtiene la mascota relacionada con la historia
-    print(pet.id)
+    pet = Pet.objects.filter(history__id=id).first()  
+    pet_id = pet.id if pet else None  
+
+    if pet.owner.id is not request.user.id:
+           raise PermissionDenied()
+    
     return render(request, 'auth/appo.html', {
         'appo': appo,
-        'pet_id': pet.id	
+        'pet_id': pet_id
     })
 
 def editHistory(request):
@@ -257,4 +276,16 @@ def editHistory(request):
         history.save();
 
         return JsonResponse({'message': 'History added successfully'}, status=201)
+     
+@csrf_exempt
+def deleteHistory(request):
+    if request.method== 'POST':
+         data=json.loads(request.body)
+         historyId=data.get("id","");
+         history=History.objects.get(id=historyId);
+         history.delete()
+         return HttpResponseRedirect(reverse('home'))
+          
+       
+
     

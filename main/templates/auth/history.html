@@ -24,13 +24,13 @@
             </div>
             <div class="mb-3">
               <label for="date" class="col-form-label">Date:</label>
-              <input type="date" class="form-control" id="date" name="date"  max="{{date}}">
+              <input type="date" class="form-control"  id="date" name="date"  max="{{date}}">
           </div>
           <div class="mb-3">
             <label for="description" class="col-form-label">Description:</label>
             <div class="form-floating">
               <textarea class="form-control" placeholder="Leave a comment here" id="description" name="description" style="height: 100px"></textarea>
-              <label for="floatingTextarea2">Here you can put the doctor comments</label>
+              <label >Here you can put the doctor comments</label>
             </div>
         </div>
 
@@ -38,7 +38,7 @@
           <label for="prescription" class="col-form-label">Prescription:</label>
           <div class="form-floating">
             <textarea class="form-control" placeholder="Leave a comment here" id="prescription" name="prescription" style="height: 100px"></textarea>
-            <label for="floatingTextarea2">You can leave it blank</label>
+            <label >You can leave it blank</label>
           </div>
       </div>
           
@@ -72,9 +72,9 @@
         <div class="input-group mb-3">
             <label class="input-group-text" for="inputGroupSelect01">Filter by: </label>
             <select class="form-select" id="inputGroupSelect01"  name="filter">
-              <option selected value="addition" {% if filter_mode == 'addition' %}selected{% endif %}>Date of Addition</option>
-              <option value="expired" {% if filter_mode == 'expired' %}selected{% endif %}>Newest</option>
-              <option value="appl" {% if filter_mode == 'appl' %}selected{% endif %}>Oldest</option>   
+              <option  selected disabled >Select a filter</option>      
+              <option value="newest" {% if filter_mode == 'newest' %}selected{% endif %}>Newest</option>
+              <option value="oldest" {% if filter_mode == 'oldest' %}selected{% endif %}>Oldest</option>   
             </select>   
             <input type="submit" class="btn btn-dark" value="Filter">
           </div>
@@ -84,13 +84,17 @@
     <div class="text-center">
         <div class="filter-date">
             <h4>Filter by date:</h4>
-            <input type="date" name="" id="">
+          <form method="GET" >
+            <input type="date" name="date" id="filterDate" max="{{date}}" >
+            <input type="submit" class="btn btn-dark" value="Filter Date">
+          </form>
         </div>
     </div>
 </div>
 
 
 <div class="container mt-4">
+{% if pet_hist %}
 {% for hist in pet_hist %}
   
 <div class="card text-center">
@@ -104,6 +108,10 @@
 </div>
 
 {% endfor %}
+{% else %}
+<div class="text-center">
+  <p>There are no appointments</p>
+{% endif %}
 
 </div>
 {% endblock body %}

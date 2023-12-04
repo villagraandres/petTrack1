@@ -43,7 +43,7 @@
           </div>
       </div>
           
-            <input type="hidden" value="{{pet.id}}" id="petid" name="petid">
+            <input type="hidden" value="{{pet_id}" id="petid" name="petid">
             <input type="hidden" value="{{appo.id}}" id="appoid" name="appoid">
           
           </form>
@@ -86,7 +86,7 @@
         Edit <i class="fa-solid fa-pen-to-square"></i></button>
 
 
-        <button type="button" class="btn btn-danger"> Delete <i class="fa-solid fa-trash"></i></i></button>
+        <button type="button" id="deleteSubmit" class="btn btn-danger" data-pet="{{pet_id}}" data-id="{{appo.id}}"> Delete <i class="fa-solid fa-trash"></i></i></button>
 
     </div>
 {% endblock body %}

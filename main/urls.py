@@ -16,5 +16,6 @@ urlpatterns = [
     path('api/addHistory',views.addHistory,name="addHistory"),
     path('pet/appo/<int:id>',views.appo,name="appo"),
     path('api/editHistory',views.editHistory,name="editHistory"),
+    path('api/deleteHistory',views.deleteHistory,name="deleteHistory"),
 
 ]
