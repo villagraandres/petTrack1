@@ -62,3 +62,10 @@ class Weight(models.Model):
 
     def __str__(self):
         return f"{self.weight} kg"
+    
+class Medicines(models.Model):
+    pet=models.ForeignKey(Pet,on_delete=models.CASCADE,related_name="medicines")
+    name=models.CharField(max_length=50);
+    frequency=models.CharField(max_length=50);
+    def __str__(self):
+        return f"{self.name} of {self.pet.name}"

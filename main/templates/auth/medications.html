@@ -1,0 +1,63 @@
+{% extends "adminLayout.html" %}
+
+{% block body %}
+<a  class="btn-3" href="{% url "dashboard" id=pet_id %}" type="button"><i class="fa-solid fa-backward"></i> Back to Main Menu  </a> 
+<div class="container mt-4">
+
+    <h1 class="text-center">Medications</h1>
+    <p class="text-center text-muted">In this section, you can see the different medicines that your pet takes.</p>
+</div>
+
+<div class="container mt-4">
+
+    <button class="btn-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">New Medicine +</button>
+
+    
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">New Medicine</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="weightForm" >
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="date" class="col-form-label">Name:</label>
+                  <input type="text" class="form-control" id="name" name="nmae" >
+              </div>
+              <div class="mb-3">
+                <label for="weight" class="col-form-label">Frequency:</label>
+                <input type="text" class="form-control" id="frequency" name="frequency" placeholder="Ex: 3 times per week"  >
+            </div>
+                
+              
+                <input type="hidden" value="{{pet_id}}" id="petid" name="petid">
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="weightSubmit" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+{% endblock body %}
+
+
+{% block script %}
+
+
+
+
+{% endblock script %}
+
+
+
+

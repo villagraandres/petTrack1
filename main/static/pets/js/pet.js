@@ -9,12 +9,24 @@ function addPet(e){
     const inputs=form.querySelectorAll('input');
     const selects=form.querySelectorAll('select')
     const fileInput = document.getElementById('fileInput');
+    const weight=document.querySelector('#weight').value;
     const file = fileInput.files[0];
     document.querySelector('#petSubmit').disabled=true;
    
     if(!verify(inputs,selects)){
         return
     }
+    if(weight<0){
+        document.querySelector('#petAlert').classList.add('d-block');
+        document.querySelector('#petAlert').classList.remove('d-none');
+        document.querySelector('#petSubmit').disabled=false;
+        setTimeout(() => {
+          document.querySelector('#petAlert').classList.remove('d-block');
+          document.querySelector('#petAlert').classList.add('d-none');
+        }, 1000);
+        return
+    }
+    
    const info=new FormData(form)
    info.append('file', file);
    fetch('/api/addPet', {

@@ -115,11 +115,12 @@ def addPet(request):
         birth=request.POST['birth']
         specie=request.POST['specie']
         sex=request.POST['sex']
+        breed=request.POST['breed']
         weight=request.POST['weight']
         file = request.FILES['file']
 
             
-        pet=Pet(name=name,birth=birth,specie=specie,sex=sex,weight=weight,owner=request.user,pet_image=file)
+        pet=Pet(name=name,birth=birth,specie=specie,sex=sex,weight=weight,owner=request.user,pet_image=file,breed=breed)
         pet.save()
         current_date = datetime.now().date()
         weightRegister=Weight(pet=pet,date=current_date,weight=weight)
@@ -325,4 +326,10 @@ def getWeight(request):
     } 
      return JsonResponse(data)
 
+
+def medications(request,id):
+    
+      return render(request, 'auth/medications.html', {
+        'pet_id':id
+    })
     
