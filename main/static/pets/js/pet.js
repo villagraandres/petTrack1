@@ -33,6 +33,7 @@ function verify(inputs,selects){
         if(inputs[i].value.trim()==''){
           document.querySelector('#petAlert').classList.add('d-block');
           document.querySelector('#petAlert').classList.remove('d-none');
+          document.querySelector('#petSubmit').disabled=false;
           setTimeout(() => {
             document.querySelector('#petAlert').classList.remove('d-block');
             document.querySelector('#petAlert').classList.add('d-none');
@@ -44,6 +45,7 @@ function verify(inputs,selects){
         if(selects[i].value.trim()==''){     
             document.querySelector('#petAlert').classList.add('d-block');
             document.querySelector('#petAlert').classList.remove('d-none');
+            document.querySelector('#petSubmit').disabled=false;
             setTimeout(() => {
               document.querySelector('#petAlert').classList.remove('d-block');
               document.querySelector('#petAlert').classList.add('d-none');

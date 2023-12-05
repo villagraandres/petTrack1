@@ -1,7 +1,9 @@
 {% extends 'adminLayout.html' %}
 
 {% block body %}
-<h1 class="text-center">{{pet.name}} <img src="{{pet.pet_image.url}}" class="pet-img" alt="pet image"></h1>
+<div class="brand">
+   <h4 class="text-gradient">{{pet.name}}  <i class="fa-solid fa-paw"></i>  <img src="{{pet.pet_image.url}}" class="pet-img" alt="pet image"></h4>
+</div>
 
 
 <a href="{% url "history" id=pet.id %}">

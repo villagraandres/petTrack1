@@ -1,4 +1,6 @@
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#weightSubmit').addEventListener('click', add)
     getWeight();
@@ -7,7 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function getWeight() {
-    fetch('/api/getWeight?pet_id=57') // Reemplaza '1' con el ID de la mascota adecuada
+  idPet=document.querySelector('#petid').value
+    fetch('/api/getWeight?pet_id='+idPet) 
   .then(response => response.json())
   .then(data => {
     console.log(data);
@@ -22,7 +25,7 @@ function getWeight() {
   data: {
     labels: dates,
     datasets: [{
-      label: 'Peso de la Mascota',
+      label: 'Pet Weight',
       data: weights,
       borderColor: 'blue',
       borderWidth: 1,
@@ -30,7 +33,7 @@ function getWeight() {
     }]
       },
       options: {
-        // Opciones adicionales, como títulos, leyendas, escalas, etc.
+         
       }
     });
   })

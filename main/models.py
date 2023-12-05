@@ -39,6 +39,7 @@ class Pet(models.Model):
     sex=models.CharField(max_length=15);
     owner=models.ForeignKey(User,on_delete=models.CASCADE,related_name="pets");
     pet_image=models.ImageField(null=True,blank=True,upload_to="images/")
+    breed=models.CharField(max_length=50);
     vacciness=models.ManyToManyField(Vaccine)
     history=models.ManyToManyField(History)
 

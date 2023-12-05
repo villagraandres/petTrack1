@@ -128,6 +128,8 @@ def addPet(request):
 
 def dashboard(request,id):
     pet=Pet.objects.get(id=id)
+    print(pet.specie)
+   
     
     if pet.owner.id is not request.user.id:
            raise PermissionDenied()

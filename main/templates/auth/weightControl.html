@@ -2,9 +2,12 @@
 {% load static %}
 
 {% block body %}
-<h1 class="text-center">Weight Control</h1>
+
+<a  class="btn-3" href="{% url "dashboard" id=pet_id %}" type="button"><i class="fa-solid fa-backward"></i> Back to Main Menu  </a>
+
 
 <div class="container mt-4">
+  <h1 class="text-center">Weight Control</h1>
     <button class="btn-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">Add a new record +</button>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -63,6 +66,8 @@
       </table>
 
 
+
+
       
 </div>
 
@@ -70,9 +75,6 @@
 {% endblock body %}
 
 {% block script %}
-<!-- Importa el adaptador de fecha de Chart.js -->
-
-<!-- Agrega esto en tu archivo HTML -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="{% static 'pets/js/weight.js' %}"></script>

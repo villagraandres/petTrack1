@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const editSubmit = document.querySelector('#historyEdit');
     const deleteSubmit = document.querySelector('#deleteSubmit');
     const dateBtn=document.querySelector('#filterDate');
+    
    
     if (addSubmit) {
         addSubmit.addEventListener('click', add);
