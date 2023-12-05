@@ -21,5 +21,7 @@ urlpatterns = [
     path('api/addWeight',views.addWeight,name="addWeight"),
     path('api/getWeight',views.getWeight,name="getWeight"),
     path('pet/medications/<int:id>',views.medications,name="medications"),
+    path('api/addMed',views.addMed,name="addMed"),
+    path('api/editMed',views.editMed,name="editMed"),
 
 ]

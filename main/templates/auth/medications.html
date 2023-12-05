@@ -1,4 +1,5 @@
 {% extends "adminLayout.html" %}
+{% load static %}
 
 {% block body %}
 <a  class="btn-3" href="{% url "dashboard" id=pet_id %}" type="button"><i class="fa-solid fa-backward"></i> Back to Main Menu  </a> 
@@ -22,14 +23,14 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form id="weightForm" >
+            <form id="medForm" >
                 {% csrf_token %}
                 <div class="mb-3">
-                  <label for="date" class="col-form-label">Name:</label>
-                  <input type="text" class="form-control" id="name" name="nmae" >
+                  <label for="name" class="col-form-label">Name:</label>
+                  <input type="text" class="form-control" id="name" name="name" >
               </div>
               <div class="mb-3">
-                <label for="weight" class="col-form-label">Frequency:</label>
+                <label for="frequency" class="col-form-label">Frequency:</label>
                 <input type="text" class="form-control" id="frequency" name="frequency" placeholder="Ex: 3 times per week"  >
             </div>
                 
@@ -39,7 +40,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" id="weightSubmit" class="btn btn-primary">Add</button>
+          <button type="button" id="medicineSubmit" class="btn btn-primary">Add</button>
         </div>
       </div>
     </div>
@@ -48,11 +49,87 @@
 </div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Medicine</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form id="medFormEdit" >
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="name" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="nameEdit" name="name"  >
+            </div>
+            <div class="mb-3">
+              <label for="frequency" class="col-form-label">Frequency:</label>
+              <input type="text" class="form-control" id="frequencyEdit" name="frequency" placeholder="Ex: 3 times per week"  >
+          </div>
+              
+            
+              <input type="hidden" value="{{pet_id}}" id="petid" name="petid">
+              <input type="hidden" id="medid" name="medid">
+              
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="medicineEdit" class="btn btn-primary" >Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+<div class="container mt-5">
+  <div class="row">
+    {% if registers %}
+    {% for register in registers %}
+      <div class="col-md-6">
+        <div class="card vac-card mb-5">
+          <div class="card-body">
+            <h4 class="card-title text-center fw-bold">{{ register.name }}</h4>
+            <p class="fs-4 text-success">Application: <br> {{ register.frequency }} </p>
+
+            <button type="button" class="btn btn-secondary" type="button" data-bs-toggle="modal"
+            data-bs-target="#editModal" data-name="{{register.name}}" data-frequency="{{register.frequency}}" data-id="{{register.id}}">Update</button>
+
+          <button type="button" class="btn btn-danger deleteBtns" >Delete</button>
+           
+          </div>
+        </div>
+      </div>
+      {% if forloop.counter|divisibleby:2 %}
+        </div><div class="row">
+      {% endif %}
+    {% endfor %}
+
+    {% else %}
+    <p class="text-center">No vaccines available.</p>
+  {% endif %}
+  </div>
+</div>
+
+
+
+
 {% endblock body %}
 
 
 {% block script %}
 
+<script src="{% static 'pets/js/medicines.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 

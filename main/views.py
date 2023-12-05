@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import login
 from django.core.mail import send_mail
 from django.db import IntegrityError
-from .models import User, Pet, Vaccine, History, Weight
+from .models import Medicines, User, Pet, Vaccine, History, Weight
 from django.core.exceptions import PermissionDenied
 from datetime import datetime,date
 import json
@@ -328,8 +328,33 @@ def getWeight(request):
 
 
 def medications(request,id):
-    
+      registers=Medicines.objects.filter(pet=id);
       return render(request, 'auth/medications.html', {
-        'pet_id':id
+        'pet_id':id,
+        'registers':registers
     })
+
+def addMed(request):
+    if request.method=='POST':
+        name=request.POST.get('name')
+        frequency=request.POST.get('frequency')
+        petid=request.POST.get('petid')
+        pet=Pet.objects.get(id=petid)
+
+        medicine=Medicines(pet=pet,name=name,frequency=frequency);
+        medicine.save()
+        return JsonResponse({'message': 'Medicine added successfully'}, status=201)
     
+def editMed(request):
+
+    if request.method=='POST':
+        name=request.POST.get('name')
+        frequency=request.POST.get('frequency')
+
+        medid=request.POST.get('medid')
+
+        medicine=Medicines.objects.get(id=medid)
+        medicine.name=name
+        medicine.frequency=frequency
+        medicine.save()
+        return JsonResponse({'message': 'Medicine edited successfully'}, status=201)
