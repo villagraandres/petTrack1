@@ -49,10 +49,10 @@
         <button class="menu-btn">
            
         </button>
-        <a class="myPets" href="/home">
-            <p>My pets </p>
+        <a class="myPets" href="{% url "home" %}">
+            <p>My pets <i class="fa-solid fa-paw"></i> </p>
         </a>
-        <a class="profile">
+        <a class="profile" href="{% url "profile" %}">
             <p>Profile <i class="fa-solid fa-user"></i> </p>
         </a>
     </aside>

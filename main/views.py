@@ -403,3 +403,17 @@ def deletePet(request):
         pet=Pet.objects.get(id=petId);
         pet.delete()
         return HttpResponseRedirect(reverse('home'))
+    
+def profile(request):
+    return render(request,'auth/profile.html',{
+        'user':request.user
+    })
+
+def petInfo(request,id):
+    pet=Pet.objects.get(id=id)
+    pet_age = date.today().year - pet.birth.year
+    return render(request,'auth/petInfo.html',{
+        'pet':pet,
+        'user':request.user,
+        'pet_age':pet_age
+    })
