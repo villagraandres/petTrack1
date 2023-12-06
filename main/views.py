@@ -1,3 +1,4 @@
+from django.core.files.storage import default_storage
 from django.shortcuts import render, HttpResponseRedirect
 from django.http import HttpResponse, JsonResponse, Http404
 from django.urls import reverse
@@ -117,15 +118,35 @@ def addPet(request):
         sex=request.POST['sex']
         breed=request.POST['breed']
         weight=request.POST['weight']
-        file = request.FILES['file']
+        file = request.FILES.get('file')
+        petid=request.POST['petid']
+
+        if petid != '':
+            pet=Pet.objects.get(id=petid)
+            pet.name=name
+            pet.birth=birth
+            pet.specie=specie
+            pet.sex=sex
+            pet.breed=breed
+            pet.weight=weight
+            if file:
+                if pet.pet_image:
+                    default_storage.delete(pet.pet_image.path)
+                pet.pet_image = file  # Reemplazar la imagen
+            pet.save()
+            current_date = datetime.now().date()
+            weightRegister=Weight(pet=pet,date=current_date,weight=weight)
+            weightRegister.save()
+            return HttpResponse({"message":"ok"});
 
             
         pet=Pet(name=name,birth=birth,specie=specie,sex=sex,weight=weight,owner=request.user,pet_image=file,breed=breed)
         pet.save()
+
         current_date = datetime.now().date()
         weightRegister=Weight(pet=pet,date=current_date,weight=weight)
         weightRegister.save()
-        return HttpResponse(request.POST['file']);
+        return HttpResponse({"message":"ok"});
 
 def dashboard(request,id):
     pet=Pet.objects.get(id=id)
@@ -358,3 +379,21 @@ def editMed(request):
         medicine.frequency=frequency
         medicine.save()
         return JsonResponse({'message': 'Medicine edited successfully'}, status=201)
+
+@csrf_exempt
+def deleteMed(request):
+    if request.method== 'POST':
+         data=json.loads(request.body)
+         medId=data.get("id","");
+         med=Medicines.objects.get(id=medId);
+         med.delete()
+         return HttpResponseRedirect(reverse('home'))
+    
+@csrf_exempt
+def deleteWeight(request):
+    if request.method=='POST':
+        data=json.loads(request.body)
+        weightId=data.get("id","");
+        weight=Weight.objects.get(id=weightId);
+        weight.delete()
+        return HttpResponseRedirect(reverse('home'))

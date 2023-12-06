@@ -3,7 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
     modalEdit=document.querySelector('#editModal')
     if(modalEdit){modalEdit.addEventListener('show.bs.modal', editModal)}
     document.querySelector('#medicineEdit').addEventListener('click', edit)
-    
+    document.querySelectorAll('.deleteBtns').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+            deleteMed(btn.dataset.id)
+        })
+    })
 }
 );
 
@@ -12,9 +16,11 @@ function add() {
 const form= document.querySelector('form');
 const name = document.querySelector('#name').value;
 const frequency= document.querySelector('#frequency').value;
+document.querySelector('#medicineSubmit').disabled=true;
 
 if( name === '' || frequency === '') {
     alert("Please fill out all fields");
+    document.querySelector('#medicineSubmit').disabled=false;
     return ;
 }
 
@@ -48,12 +54,13 @@ function editModal(e){
 
 function edit(e){
     const form=document.querySelector('#medFormEdit');
-
     const name = document.querySelector('#nameEdit').value;
     const frequency= document.querySelector('#frequencyEdit').value;
+    document.querySelector('#medicineEdit').disabled=true;
 
     if( name === '' || frequency === '') {
         alert("Please fill out all fields");
+        document.querySelector('#medicineEdit').disabled=false;
         return ;
     }
 
@@ -74,7 +81,38 @@ function edit(e){
           }, 1500);
        
     })
+}
 
+function deleteMed(id){
     
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning', 
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            fetch('/api/deleteMed', {  
+                method: 'POST',
+                body: JSON.stringify({
+                    id:id
+                })
+            }).then(message=>{
+                Swal.fire(
+                    'Deleted!',
+                    'The med has been deleted.',
+                    'success'
+                  )
+                
+                setTimeout(() => {
+                    window.location.reload();
+                  }, 1500);
+               
+            })
+        }
+      })
 
 }

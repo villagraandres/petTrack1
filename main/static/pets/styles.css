@@ -218,7 +218,7 @@ aside{
 
 @media (max-width: 767px) {
   .pet {
-    background-color: #0A2ABA;
+    background-color: #525FE1;
     border: none;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -346,4 +346,15 @@ input[type="date"]{
   margin: 0px 0;
   padding: 10px 20px;
   font-family: 'Poppins', sans-serif;
+}
+
+.td-click{
+  cursor: pointer;
+}
+
+.actionsPet{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }

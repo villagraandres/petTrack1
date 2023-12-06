@@ -61,7 +61,7 @@
             <tr>
                 <th scope="row">{{ record.date }}</th>
                 <td>{{ record.weight }}</td>
-                <td>Delete</td>
+                <td class="link-danger td-click " data-id="{{record.id}}">Delete</td>
             </tr>
 
           {% endfor %}

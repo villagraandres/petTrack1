@@ -1,7 +1,7 @@
 {% extends 'adminLayout.html' %}
 {% load static %}
 {% block body %}
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add new pet</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add new pet</button>
 
 
 
@@ -58,6 +58,7 @@
             <label for="fileInput" class="col-form-label">Image:</label>
             <input type="file" accept="image/png, image/gif, image/jpeg"  class="form-control" id="fileInput" name="image">
           </div>
+          <input type="hidden" id="petid" name="petid" >
 
 
         </form>
@@ -85,11 +86,18 @@
         </div> 
         <div class="pet-body">
           <h5 class="pet-title text-center text-white" >{{ pet.name }} </h5>
+          <div class="mt-4 actionsPet">
+            <div class="editPet" data-bs-toggle="modal" data-bs-target="#exampleModal" data-petid="{{ pet.id }}" data-name="{{pet.name}}"
+            data-birth="{{pet.birth}}" data-sex="{{pet.sex}}" data-breed="{{pet.breed}}" data-weight="{{pet.weight}}" data-specie="{{pet.specie}}"
+            > <i class="fa-solid fa-pen-to-square"></i></div>
+            <div class="deletePet" data-pet-id="{{ pet.id }}"> <i class="fa-solid fa-trash"></i></div>
+          </div>
         </div>
       </div>
     </a>
   {% endfor %}
 </div>
+
 
 
     

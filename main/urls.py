@@ -23,5 +23,8 @@ urlpatterns = [
     path('pet/medications/<int:id>',views.medications,name="medications"),
     path('api/addMed',views.addMed,name="addMed"),
     path('api/editMed',views.editMed,name="editMed"),
+    path('api/deleteMed',views.deleteMed,name="deleteMed"),
+    path('api/deleteWeight',views.deleteWeight,name="deleteWeight"),
+
 
 ]

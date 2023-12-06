@@ -3,6 +3,11 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#weightSubmit').addEventListener('click', add)
+    document.querySelectorAll('.td-click').forEach(td=>{
+      td.addEventListener('click',()=>{
+        deleteWeight(td.dataset.id)
+      })
+    })
     getWeight();
 
 
@@ -13,7 +18,6 @@ function getWeight() {
     fetch('/api/getWeight?pet_id='+idPet) 
   .then(response => response.json())
   .then(data => {
-    console.log(data);
     const dates = data.dates;
     const weights = data.weights;
     
@@ -72,4 +76,37 @@ function add(e) {
     )
 }
 
+function deleteWeight(id){
+   
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning', 
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+        fetch('/api/deleteWeight', {  
+            method: 'POST',
+            body: JSON.stringify({
+                id:id
+            })
+        }).then(message=>{
+            Swal.fire(
+                'Deleted!',
+                'The record has been deleted.',
+                'success'
+              )
+            
+            setTimeout(() => {
+                window.location.reload();
+              }, 1500);
+           
+        })
+    }
+  })
 
+
+}
