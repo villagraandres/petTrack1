@@ -25,6 +25,7 @@ urlpatterns = [
     path('api/editMed',views.editMed,name="editMed"),
     path('api/deleteMed',views.deleteMed,name="deleteMed"),
     path('api/deleteWeight',views.deleteWeight,name="deleteWeight"),
+    path('api/deletePet',views.deletePet,name="deletePet"),
 
 
 ]

@@ -134,9 +134,6 @@ def addPet(request):
                     default_storage.delete(pet.pet_image.path)
                 pet.pet_image = file  # Reemplazar la imagen
             pet.save()
-            current_date = datetime.now().date()
-            weightRegister=Weight(pet=pet,date=current_date,weight=weight)
-            weightRegister.save()
             return HttpResponse({"message":"ok"});
 
             
@@ -396,4 +393,13 @@ def deleteWeight(request):
         weightId=data.get("id","");
         weight=Weight.objects.get(id=weightId);
         weight.delete()
+        return HttpResponseRedirect(reverse('home'))
+    
+@csrf_exempt
+def deletePet(request):
+    if request.method=='POST':
+        data=json.loads(request.body)
+        petId=data.get("id","");
+        pet=Pet.objects.get(id=petId);
+        pet.delete()
         return HttpResponseRedirect(reverse('home'))

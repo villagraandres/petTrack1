@@ -11,7 +11,18 @@ document.addEventListener('DOMContentLoaded',()=>{
   const exampleModal = document.getElementById('exampleModal');
 
   if(exampleModal){ exampleModal.addEventListener('show.bs.modal',edit)}
-  
+
+
+  document.querySelectorAll('.deletePet').forEach(btn=>{
+      btn.addEventListener('click',function(e){
+        e.preventDefault();
+        deletePet(btn.dataset.id)
+      })
+  })
+
+
+
+
 })
 function addPet(e){
     e.preventDefault()
@@ -125,6 +136,38 @@ function edit(e){
       option.selected = true;
     }
   });
+}
 
-  
+function deletePet(id){
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+        fetch('/api/deletePet',{
+            method:'POST',
+            body:JSON.stringify({id:id})
+        })
+        .then(response=>response.json)
+        .then(message=>{
+            Swal.fire(
+                'Deleted!',
+                'The Pet has been deleted.',
+                'success'
+              )
+        })
+
+        setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+
+     
+    }
+  })
 }
