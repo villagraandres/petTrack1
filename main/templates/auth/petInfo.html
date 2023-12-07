@@ -1,8 +1,9 @@
 {% extends "adminLayout.html" %}
+{% load static %}
 
 {% block body %}
-
-<div class="container-sm d-flex justify-content-center align-items-center flex-column" >
+<a  class="btn-3" href="{% url "dashboard" id=pet.id %}" type="button"><i class="fa-solid fa-backward"></i> Back to Main Menu  </a>
+<div class="container-sm d-flex justify-content-center align-items-center flex-column containerPetInfo" >
     <div class="d-flex  align-items-center">
         <h2 class="me-3" >{{pet.name}}   </h2>
         <img src="{{pet.pet_image.url}}" class="pet-img" alt="pet image">
@@ -12,14 +13,25 @@
     <p class="petInformation"> <span class="pet-span">Sex:</span> {{pet.sex|capfirst}} </p>
     <p class="petInformation"> <span class="pet-span">Weight:</span> {{pet.weight}} lbs </p>
     <p class="petInformation"> <span class="pet-span">Breed:</span> {{pet.breed|capfirst}} </p>
-    <p class="petInformation"> <span class="pet-span">Age:</span>{{pet_age}} </p>
+    <p class="petInformation"> <span class="pet-span">Age:</span>{{pet_age}} years </p>
     <p class="petInformation"> <span class="pet-span">Birthday:</span>  {{pet.birth}} </p>
     <p class="petInformation"> <span class="pet-span">Owner:</span> {{user.first_name}}  </p>
   
 </div>
 </div>
 
+<button id="printButton">Generar PDF</button>
+
+
 {% endblock body %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<script src="{% static 'pets/js/petInfo.js' %}"></script>
+{% endblock script %}
+
+
+
 
 
 

@@ -211,8 +211,13 @@ def addvacc(request):
 @csrf_exempt
 def delete(request):
     if request.method== 'POST':
+    
          data=json.loads(request.body)
          vaccId=data.get("id","");
+         pet=Pet.objects.get(vacciness__id=vaccId)
+         if pet.owner.id is not request.user.id:
+           raise PermissionDenied()
+         
          vacc=Vaccine.objects.get(id=vaccId);
          vacc.delete()   
          return JsonResponse({"message":"deleted"})
@@ -256,11 +261,14 @@ def addHistory(request):
         prescription=request.POST.get('prescription')
         petid=request.POST.get('petid')
 
+        pet = Pet.objects.get(id=petid)
+
+        if pet.owner.id is not request.user.id:
+           raise PermissionDenied()
      
         history=History(subject=subject,doctor=doctor,date=date,description=description,prescription=prescription);
         history.save()
 
-        pet = Pet.objects.get(id=petid)
         pet.history.add(history)
         pet.save()
 
@@ -305,6 +313,10 @@ def deleteHistory(request):
     if request.method== 'POST':
          data=json.loads(request.body)
          historyId=data.get("id","");
+         pet=Pet.objects.get(history__id=historyId)
+         if pet.owner.id is not request.user.id:
+                raise PermissionDenied()
+         
          history=History.objects.get(id=historyId);
          history.delete()
          return HttpResponseRedirect(reverse('home'))
@@ -382,6 +394,9 @@ def deleteMed(request):
     if request.method== 'POST':
          data=json.loads(request.body)
          medId=data.get("id","");
+         pet=Pet.objects.get(medicines__id=medId)
+         if pet.owner.id is not request.user.id:
+                    raise PermissionDenied()
          med=Medicines.objects.get(id=medId);
          med.delete()
          return HttpResponseRedirect(reverse('home'))
@@ -391,6 +406,10 @@ def deleteWeight(request):
     if request.method=='POST':
         data=json.loads(request.body)
         weightId=data.get("id","");
+        pet=Pet.objects.get(weight__id=weightId)
+        
+        if pet.owner.id is not request.user.id:
+                    raise PermissionDenied()
         weight=Weight.objects.get(id=weightId);
         weight.delete()
         return HttpResponseRedirect(reverse('home'))
@@ -401,6 +420,8 @@ def deletePet(request):
         data=json.loads(request.body)
         petId=data.get("id","");
         pet=Pet.objects.get(id=petId);
+        if pet.owner.id is not request.user.id:
+                    raise PermissionDenied()
         pet.delete()
         return HttpResponseRedirect(reverse('home'))
     
