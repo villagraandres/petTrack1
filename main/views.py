@@ -67,8 +67,7 @@ def register(request):
             except IntegrityError:
                 return render(request,'login/register.html',{'error':'Email already exists'})
             
-            activation_link = f'http://127.0.0.1:8000/confirm/{code}'
-
+            activation_link = request.build_absolute_uri(f'/confirm/{code}')
             send_mail(
                 "Confirm your Account",
                 "",
@@ -99,6 +98,60 @@ def confirm(request,num):
         login(request,user)
         return render(request, 'login/confirm.html', {'message': 'Your account has been confirmed'})
     
+def forgot(request):
+
+    if request.method=='POST':
+         email=request.POST['email'];
+         try:
+              user=User.objects.get(username=email)
+         except User.DoesNotExist:
+               return render(request,'login/forgot.html',{'error':'This email dosent have an account'})
+         
+         if user.auth==False:
+                return render(request,'login/forgot.html',{'error':'The account is not verified'})
+         
+         alphabet = string.ascii_letters + string.digits
+         code = ''.join(secrets.choice(alphabet) for i in range(16))
+         user.code=code
+         user.save();
+         activation_link = request.build_absolute_uri(f'/changePassword/{code}')
+         send_mail(
+                "Change your Password",
+                "",
+                "from@example.com",
+                [email],
+                fail_silently=False,
+                html_message=f" <h1>Hi {user.first_name} </h1> <p>Click <a href='{activation_link}'>here</a> to change your password </p>"
+            )
+         return render(request,'login/email.html')
+
+         
+         
+    return render(request,'login/forgot.html',);
+
+def changePassword(request,num):
+      try:
+        user=User.objects.get(code=num)
+      except User.DoesNotExist:
+           return render(request,'login/changePassword.html',{'error':'The user dosent exist'})
+      
+      if request.method=='POST':
+           password=request.POST['password'];
+           password2=request.POST['password2']
+           password_len=len(password)
+           if password_len < 8:
+                 return render(request,'login/changePassword.html',{'error':'Must contain at least 8 characters.'})
+           if password != password2:
+                 return render(request,'login/changePassword.html',{'error':'The passwords dont match'})
+           
+           user.set_password(password);
+           user.code='';
+           user.save();
+
+                
+      
+      return render(request,'login/changePassword.html')
+     
 
 
 def home(request):
@@ -109,6 +162,7 @@ def home(request):
         'pets':pets,
         'date':  formatted_date
     });
+
 
 def addPet(request):
     if request.method=='POST':
