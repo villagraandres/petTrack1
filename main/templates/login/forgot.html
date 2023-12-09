@@ -4,13 +4,18 @@
 
 
 <div class="container index">
+  {% if user.is_authenticated %}
+    <a  class="btn-3" href="{% url "profile" %}" type="button"><i class="fa-solid fa-backward"></i> Back  </a>
+  {% endif %}
     <div class="brand">
         <h1 class="text-gradient">PetTrack  <i class="fa-solid fa-paw"></i> </h1>
         <p class="slogan">Keeping your pets on track </p>
-
+      
     </div>
-    <h2 class="text-center">Change Password</h2>
+  
 
+    <h2 class="text-center">Change Password</h2>
+    
     <div class="form">
       {{error}}
     <form method="POST">

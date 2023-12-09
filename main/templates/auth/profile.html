@@ -9,6 +9,6 @@
 </div>
 <div class="d-flex justify-content-center align-items-center gap-4 mt-4">
     <a href="{% url "logout" %}" class="link-2 text-center">Logout</a>
-    <a href="/admin/users/{{user.id}}/delete" class="link-2 text-center">Change Password</a> 
+    <a href="{% url "forgot" %}" class="link-2 text-center">Change Password</a> 
 </div>
 {% endblock body %}

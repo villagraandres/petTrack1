@@ -124,7 +124,7 @@ def forgot(request):
                 fail_silently=False,
                 html_message=f" <h1>Hi {user.first_name} </h1> <p>Click <a href='{activation_link}'>here</a> to change your password </p>"
             )
-         return render(request,'login/email.html')
+         return render(request,'login/email.html',{'user':request.user})
 
          
          
