@@ -120,7 +120,9 @@ STATICFILES_DIRS=(
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_HOST_USER = 'd11f0a51d1b5a4'
-EMAIL_HOST_PASSWORD = '763015051ddfcf'
-EMAIL_PORT = '2525'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'pettrackapp@gmail.com'
+EMAIL_HOST_PASSWORD = 'hlrhlvmxqgmekxlj'
+EMAIL_PORT = 587
+EMAIL_USE_TLS=True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
