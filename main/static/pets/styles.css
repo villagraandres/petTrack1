@@ -376,3 +376,7 @@ input[type="date"]{
   font-weight: bolder;
   font-size: 25px;
 }
+.link-2{
+  color: blue;
+  text-decoration: underline;
+}

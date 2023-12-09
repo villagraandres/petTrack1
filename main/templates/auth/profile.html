@@ -1,16 +1,14 @@
 {% extends "adminLayout.html" %}
 {% block body %}
-<div class="container mt-4">
+<div class="container mt-4 mb-4">
     <h1 class="text-center">User Information</h1>
 
     <p class="petInformation"> <span class="pet-span">Name:</span> {{user.first_name}}</p>
     <p class="petInformation"> <span class="pet-span">Email:</span> {{user.username}}</p>
 
-    <div class="actions">
-        <a href="/admin/users/{{user.id}}/edit" class="btn btn-primary">Logout</a>
-        <a href="/admin/users/{{user.id}}/delete" class="btn btn-danger">Change Password</a> 
-    <div>
-
-
+</div>
+<div class="d-flex justify-content-center align-items-center gap-4 mt-4">
+    <a href="{% url "logout" %}" class="link-2 text-center">Logout</a>
+    <a href="/admin/users/{{user.id}}/delete" class="link-2 text-center">Change Password</a> 
 </div>
 {% endblock body %}

@@ -30,6 +30,7 @@ urlpatterns = [
     path('api/deletePet',views.deletePet,name="deletePet"),
     path('profile',views.profile,name="profile"),
     path('pet/info/<int:id>',views.petInfo,name="petInfo"),
+    path('logout',views.logout_view,name="logout"),
 
 
 ]

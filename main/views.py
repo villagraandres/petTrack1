@@ -2,11 +2,12 @@ from django.core.files.storage import default_storage
 from django.shortcuts import render, HttpResponseRedirect
 from django.http import HttpResponse, JsonResponse, Http404
 from django.urls import reverse
-from django.contrib.auth import login
+from django.contrib.auth import login,logout
 from django.core.mail import send_mail
 from django.db import IntegrityError
 from .models import Medicines, User, Pet, Vaccine, History, Weight
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth.decorators import login_required
 from datetime import datetime,date
 import json
 import secrets
@@ -143,17 +144,19 @@ def changePassword(request,num):
                  return render(request,'login/changePassword.html',{'error':'Must contain at least 8 characters.'})
            if password != password2:
                  return render(request,'login/changePassword.html',{'error':'The passwords dont match'})
-           
+
            user.set_password(password);
            user.code='';
            user.save();
+           return HttpResponseRedirect(reverse('index'))
+           
 
                 
       
       return render(request,'login/changePassword.html')
      
 
-
+@login_required
 def home(request):
     current_date = datetime.now().date()
     formatted_date = current_date.strftime('%Y-%m-%d')
@@ -163,7 +166,7 @@ def home(request):
         'date':  formatted_date
     });
 
-
+@login_required
 def addPet(request):
     if request.method=='POST':
         name=request.POST['name']
@@ -199,6 +202,7 @@ def addPet(request):
         weightRegister.save()
         return HttpResponse({"message":"ok"});
 
+@login_required
 def dashboard(request,id):
     pet=Pet.objects.get(id=id)
     print(pet.specie)
@@ -211,6 +215,7 @@ def dashboard(request,id):
         'pet':pet
     })
 
+@login_required
 def vaccines(request,id):  
     pet=Pet.objects.get(id=id)
     pet_vacciones=pet.vacciness.all
@@ -236,6 +241,7 @@ def vaccines(request,id):
         'filter_mode': filter_mode
     });
 
+@login_required
 def addvacc(request):
 
    if request.method == 'POST':
@@ -262,6 +268,7 @@ def addvacc(request):
         return JsonResponse({"message": "Created succesfully."}, status=201)
         
 
+@login_required
 @csrf_exempt
 def delete(request):
     if request.method== 'POST':
@@ -277,6 +284,7 @@ def delete(request):
          return JsonResponse({"message":"deleted"})
    
 
+@login_required
 def history(request,id):  
     pet=Pet.objects.get(id=id)
     pet_hist=pet.history.all()
@@ -306,6 +314,7 @@ def history(request,id):
         'filter_mode':filterMode
     });
 
+@login_required
 def addHistory(request):
     if request.method=='POST':
         subject=request.POST.get('subject')
@@ -328,7 +337,7 @@ def addHistory(request):
 
         return JsonResponse({'message': 'History added successfully'}, status=201)
 
-
+@login_required
 def appo(request, id):
     
     appo = History.objects.get(id=id)
@@ -343,6 +352,7 @@ def appo(request, id):
         'pet_id': pet_id
     })
 
+@login_required
 def editHistory(request):
      if request.method=='POST':
         subject=request.POST.get('subject')
@@ -362,6 +372,7 @@ def editHistory(request):
 
         return JsonResponse({'message': 'History added successfully'}, status=201)
      
+@login_required
 @csrf_exempt
 def deleteHistory(request):
     if request.method== 'POST':
@@ -374,8 +385,9 @@ def deleteHistory(request):
          history=History.objects.get(id=historyId);
          history.delete()
          return HttpResponseRedirect(reverse('home'))
+    
           
-       
+@login_required       
 def weightControl(request,id):
     registers=Weight.objects.filter(pet=id)
     first_date=registers.first().date
@@ -388,6 +400,7 @@ def weightControl(request,id):
         'first_formatted':formatted_date
     })
 
+@login_required
 def addWeight(request):
     if request.method=='POST':
         weight=request.POST.get('weight')
@@ -399,6 +412,7 @@ def addWeight(request):
         weightRegister.save()
         return JsonResponse({'message': 'Weight added successfully'}, status=201)
     
+@login_required   
 def getWeight(request):
      petId=request.GET.get('pet_id');
      weights_data = Weight.objects.filter(pet_id=petId).order_by('date')
@@ -410,7 +424,7 @@ def getWeight(request):
     } 
      return JsonResponse(data)
 
-
+@login_required
 def medications(request,id):
       registers=Medicines.objects.filter(pet=id);
       return render(request, 'auth/medications.html', {
@@ -418,6 +432,7 @@ def medications(request,id):
         'registers':registers
     })
 
+@login_required
 def addMed(request):
     if request.method=='POST':
         name=request.POST.get('name')
@@ -429,6 +444,8 @@ def addMed(request):
         medicine.save()
         return JsonResponse({'message': 'Medicine added successfully'}, status=201)
     
+
+@login_required    
 def editMed(request):
 
     if request.method=='POST':
@@ -442,7 +459,8 @@ def editMed(request):
         medicine.frequency=frequency
         medicine.save()
         return JsonResponse({'message': 'Medicine edited successfully'}, status=201)
-
+    
+@login_required
 @csrf_exempt
 def deleteMed(request):
     if request.method== 'POST':
@@ -455,6 +473,7 @@ def deleteMed(request):
          med.delete()
          return HttpResponseRedirect(reverse('home'))
     
+@login_required
 @csrf_exempt
 def deleteWeight(request):
     if request.method=='POST':
@@ -468,6 +487,7 @@ def deleteWeight(request):
         weight.delete()
         return HttpResponseRedirect(reverse('home'))
     
+@login_required    
 @csrf_exempt
 def deletePet(request):
     if request.method=='POST':
@@ -479,11 +499,13 @@ def deletePet(request):
         pet.delete()
         return HttpResponseRedirect(reverse('home'))
     
+@login_required   
 def profile(request):
     return render(request,'auth/profile.html',{
         'user':request.user
     })
 
+@login_required
 def petInfo(request,id):
     pet=Pet.objects.get(id=id)
     pet_age = date.today().year - pet.birth.year
@@ -492,3 +514,6 @@ def petInfo(request,id):
         'user':request.user,
         'pet_age':pet_age
     })
+def logout_view(request):
+     logout(request)
+     return HttpResponseRedirect(reverse('index'))
