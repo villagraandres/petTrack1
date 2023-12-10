@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded',()=>{
     verificate()
     disable()
+    document.querySelector('form').addEventListener('submit', function(e) {
+        var btn = document.querySelector('#submitForm');
+        btn.disabled = true;
+    });
 })
 
 
