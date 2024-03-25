@@ -55,7 +55,7 @@ def register(request):
                 message=f"{i} is obligatory"
                 errors.append(message.capitalize())
         if request.POST.get('password')!=request.POST.get('password2'):
-            errors.append("Passwordss don't match")
+            errors.append("Passwords don't match")
         if len(errors)>=1:     
             return render(request,'login/register.html',{'errors':errors})
         else:
