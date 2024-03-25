@@ -86,7 +86,9 @@
         </div> 
         <div class="pet-body">
           <h5 class="pet-title text-center text-white" >{{ pet.name }} 
-            <span class="badge bg-primary">{{ pet.specie }}</span>
+            {% if pet.specie == "dog" %}
+            <i class="fa-solid fa-paw"></i> 
+            {% endif %}
             </h5>
           <div class="mt-4 actionsPet">
             <div class="editPet" data-bs-toggle="modal" data-bs-target="#exampleModal" data-petid="{{ pet.id }}" data-name="{{pet.name}}"
