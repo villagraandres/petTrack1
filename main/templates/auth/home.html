@@ -85,7 +85,19 @@
 
         </div> 
         <div class="pet-body">
-          <h5 class="pet-title text-center text-white" >{{ pet.name }} <i class="fa-solid fa-paw"></i> </h5>
+          <h5 class="pet-title text-center text-white" >{{ pet.name }} 
+            {% if pet.specie=="dog" %}
+            <i class="fa-solid fa-paw"></i> 
+            {% elif pet.specie=="cat"  %}
+            <i class="fa-solid fa-cat"></i>
+            {% elif pet.specie=="bird"  %}
+            <i class="fa-solid fa-feather-pointed"></i>
+            {% elif pet.specie=="reptil" %}
+            <i class="fa-solid fa-dragon"></i>
+            {% elif pet.specie=="fish" %}
+            <i class="fa-solid fa-fish"></i>
+            {% endif %}
+            </h5>
           <div class="mt-4 actionsPet">
             <div class="editPet" data-bs-toggle="modal" data-bs-target="#exampleModal" data-petid="{{ pet.id }}" data-name="{{pet.name}}"
             data-birth="{{pet.birth}}" data-sex="{{pet.sex}}" data-breed="{{pet.breed}}" data-weight="{{pet.weight}}" data-specie="{{pet.specie}}"
