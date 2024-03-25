@@ -497,10 +497,11 @@ def deletePet(request):
         petId=data.get("id","");
         pet=Pet.objects.get(id=petId);
         if pet.owner.id is not request.user.id:
-                    raise PermissionDenied()
+            raise PermissionDenied()
+        if pet.pet_image and os.path.isfile(pet.pet_image.path):
+            os.remove(pet.pet_image.path)
         pet.delete()
         return HttpResponseRedirect(reverse('home'))
-    
 @login_required   
 def profile(request):
     return render(request,'auth/profile.html',{
