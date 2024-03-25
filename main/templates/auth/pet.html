@@ -2,7 +2,19 @@
 
 {% block body %}
 <div class="">
-   <h4 class="text-gradient pet-main-name">{{pet.name}} </h4>
+   <h4 class="text-gradient pet-main-name">{{pet.name}}
+      
+      {% if pet.specie == "dog" %}
+      <i class="fa-solid fa-paw"></i> 
+      {% elif pet.specie == "cat" %}
+      <i class="fa-solid fa-cat"></i> 
+      {%elif pet.specie == "bird" %}
+      <i class="fa-solid fa-feather"></i>
+      {%elif pet.specie == "reptil" %}
+      <i class="fa-solid fa-staff-snake"></i>
+      {% endif %}   
+   
+   </h4>
 </div>
 
 
