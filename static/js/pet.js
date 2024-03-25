@@ -54,23 +54,23 @@ function addPet(e){
         }, 1000);
         return
     }
-    fetch('/api/addPet', {
-      method: 'POST',
-      body: info
-    }).then(response => {
-      if (!response.ok) {
-        return response.text().then(text => {
-          throw new Error(text);
-        });
-      }
-      return response;
-    }).then(message => {
-      window.location.reload();
-    }).catch(error => {
-      console.error('Error:', error);
-    });
- 
     
+   const info=new FormData(form)
+   fetch('/api/addPet', {
+    method: 'POST',
+    body: info
+  }).then(response => {
+    if (!response.ok) {
+      return response.text().then(text => {
+        throw new Error(text);
+      });
+    }
+    return response;
+  }).then(message => {
+    window.location.reload();
+  }).catch(error => {
+    console.error('Error:', error);
+  });
 }
 
 
