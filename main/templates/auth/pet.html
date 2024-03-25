@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="brand">
-   <h4 class="text-gradient">{{pet.name}}   <img src="{{pet.pet_image.url}}" class="pet-img" alt="pet image"></h4>
+   <h4 class="text-gradient">{{pet.name}} {% if pet.pet_image %} <img src="{{pet.pet_image.url}}" class="pet-img" alt="pet image"> {% endif %}</h4>
 </div>
 
 
