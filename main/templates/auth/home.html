@@ -88,6 +88,8 @@
           <h5 class="pet-title text-center text-white" >{{ pet.name }} 
             {% if pet.specie == "dog" %}
             <i class="fa-solid fa-paw"></i> 
+            {% elif pet.specie == "cat" %}
+            <i class="fa-solid fa-cat"></i> 
             {% endif %}
             </h5>
           <div class="mt-4 actionsPet">
