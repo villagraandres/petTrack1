@@ -50,7 +50,6 @@ class Pet(models.Model):
     def delete(self,*args,**kwargs):
         vaccines = list(self.vacciness.all())
         history=list(self.history.all())
-        default_storage.delete(self.pet_image.path)
         super().delete(*args,**kwargs)
         for vaccine in vaccines:
             vaccine.delete()

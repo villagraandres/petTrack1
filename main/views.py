@@ -176,9 +176,6 @@ def addPet(request):
         sex=request.POST['sex']
         breed=request.POST['breed']
         weight=request.POST['weight']
-        file = request.FILES.get('image')
-        print("yes?")
-        print(file)
         petid=request.POST['petid']
 
         if petid != '':
@@ -189,10 +186,6 @@ def addPet(request):
             pet.sex=sex
             pet.breed=breed
             pet.weight=weight
-            if file:
-                if pet.pet_image:
-                    default_storage.delete(pet.pet_image.path)
-                pet.pet_image = file  # Reemplazar la imagen
             pet.save()
             return HttpResponse({"message":"ok"});
 
