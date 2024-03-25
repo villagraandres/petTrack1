@@ -82,9 +82,11 @@
     <a href="{% url 'dashboard' id=pet.id %}">
       <div class="pet mb-3"> 
         <div class="pet-start">
-          {% if pet.pet_image %}
+          {% if pet.pet_image and pet.pet_image.url %}
             <img src="{{ pet.pet_image.url }}" class="pet-img" alt="...">
           {% endif %}
+
+
         </div> 
         <div class="pet-body">
           <h5 class="pet-title text-center text-white" >{{ pet.name }} </h5>
