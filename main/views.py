@@ -176,6 +176,7 @@ def addPet(request):
         breed=request.POST['breed']
         weight=request.POST['weight']
         file = request.FILES.get('file')
+        print("yes?")
         print(file)
         petid=request.POST['petid']
 
