@@ -54,16 +54,22 @@ function addPet(e){
         }, 1000);
         return
     }
-    
-   const info=new FormData(form)
-   info.append('file', file);
-   fetch('/api/addPet', {
-    method: 'POST',
-    body: info
-  }).then(message=>{
-    window.location.reload();
-  })
-   
+    fetch('/api/addPet', {
+      method: 'POST',
+      body: info
+    }).then(response => {
+      if (!response.ok) {
+        return response.text().then(text => {
+          throw new Error(text);
+        });
+      }
+      return response;
+    }).then(message => {
+      window.location.reload();
+    }).catch(error => {
+      console.error('Error:', error);
+    });
+ 
     
 }
 
