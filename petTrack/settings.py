@@ -116,7 +116,7 @@ MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'petTrack/static'),
-    os.path.join(BASE_DIR, 'main/static/pets'),
+    os.path.join(BASE_DIR, 'main/static'),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build')
