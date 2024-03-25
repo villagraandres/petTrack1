@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/51560f6c-aef8-4789-bd4a-33942a88aea7/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/PetTrack",
+    "appService.deploySubpath": "."
+}
