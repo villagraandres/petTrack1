@@ -1,8 +1,8 @@
 {% extends 'adminLayout.html' %}
 
 {% block body %}
-<div class="brand">
-   <h4 class="text-gradient">{{pet.name}} {% if pet.pet_image %} <img src="{{pet.pet_image.url}}" class="pet-img" alt="pet image"> {% endif %}</h4>
+<div class="pet-name">
+   <h4 class="text-gradient">{{pet.name}} </h4>
 </div>
 
 
@@ -13,6 +13,7 @@
        </div>
     </div>
 </a>
+
 
 <a href="{% url 'vaccines' id=pet.id %}">
 
