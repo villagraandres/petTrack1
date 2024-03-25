@@ -1,5 +1,6 @@
 
 document.addEventListener('DOMContentLoaded',()=>{
+    console.log("i am here")
     document.querySelector('#petSubmit').addEventListener('click',addPet)
     const editButtons = document.querySelectorAll('.editPet');
   editButtons.forEach(button => {
