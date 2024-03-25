@@ -16,7 +16,7 @@
         <div class="alert alert-danger d-none d-block"  id="petAlert"role="alert">
          Please complete all the inputs!
         </div>
-        <form enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="mb-3">
             <label for="name" class="col-form-label">Name:</label>

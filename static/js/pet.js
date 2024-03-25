@@ -33,6 +33,7 @@ function addPet(e){
     const fileInput = document.getElementById('fileInput');
     const weight=document.querySelector('#weight').value;
     const file = fileInput.files[0];
+    console.log(file)
     document.querySelector('#petSubmit').disabled=true;
 
     const petId=document.querySelector('#petid').value;
@@ -68,6 +69,7 @@ function addPet(e){
     return response;
   }).then(message => {
     //window.location.reload();
+    console.log(response)
   }).catch(error => {
     console.error('Error:', error);
   });
