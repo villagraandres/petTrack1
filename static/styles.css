@@ -105,8 +105,6 @@ aside {
 .pet-main-name{
   font-family: 'Poppins', sans-serif !important;
   font-weight: 800 !important;
-  background: rgb(211,245,0);
-  background: linear-gradient(90deg, rgba(211,245,0,1) 0%, rgba(244,9,33,1) 100%);
   -webkit-background-clip: text;
   -moz-background-clip: text;
   background-clip: text;
@@ -114,6 +112,12 @@ aside {
   letter-spacing: .01px;
   margin-bottom: 0;
   font-size:50px ;
+  text-align: center;
+
+  background: #121FCF;
+  background: linear-gradient(to right, #121FCF 0%, #9823CF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .brand p {
