@@ -190,7 +190,7 @@ def addPet(request):
             return HttpResponse({"message":"ok"});
 
             
-        pet=Pet(name=name,birth=birth,specie=specie,sex=sex,weight=weight,owner=request.user,pet_image=file,breed=breed)
+        pet=Pet(name=name,birth=birth,specie=specie,sex=sex,weight=weight,owner=request.user,breed=breed)
         pet.save()
 
         current_date = datetime.now().date()
